@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "issued": {
+    "fundamentos": ["FUN-000001"],
+    "steps": ["STEP-000001", "STEP-000002"],
+    "tasks": ["TASK-000001"],
+    "projects": [],
+    "evidence": []
+  },
+  "deprecated": {}
+}
