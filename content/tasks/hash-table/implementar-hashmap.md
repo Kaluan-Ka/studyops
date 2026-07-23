@@ -20,4 +20,5 @@ atualizacao e remocao por chave.
 
 - `set`, `get`, `delete` e `has` funcionando.
 - Testes automatizados para os comandos principais.
-- Nota curta explicando complexidade esperada e limitacoes.
+- Tratamento simples para chaves diferentes no mesmo bucket.
+- Nota curta explicando complexidade esperada, colisoes e limitacoes.
