@@ -42,11 +42,29 @@ components:
     textColor: "{colors.command-black}"
     rounded: "{rounded.control}"
     padding: "10px 14px"
+  button-secondary:
+    backgroundColor: "transparent"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.control}"
+    padding: "10px 14px"
   mission-card:
     backgroundColor: "{colors.parchment-panel}"
     textColor: "{colors.command-black}"
     rounded: "{rounded.control}"
     padding: "14px"
+  operational-panel:
+    backgroundColor: "{colors.orbital-navy}"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.panel}"
+    padding: "16px"
+  map-tile-current:
+    backgroundColor: "{colors.telemetry-cyan}"
+    textColor: "{colors.command-black}"
+    size: "142px"
+  map-tile-future:
+    backgroundColor: "{colors.locked-terrain}"
+    textColor: "{colors.text-muted}"
+    size: "142px"
 ---
 
 # Design System: StudyOps
@@ -58,6 +76,12 @@ components:
 StudyOps deve parecer uma mesa de operações observando um mundo de fundamentos. A interface combina linguagem de dashboard, atlas tático e boardgame: o usuário vê territórios, missões, progresso e evidências, mas sempre com clareza de estudo prático.
 
 A identidade rejeita o MVP genérico de cards editoriais em fundo claro. Também rejeita gamificação decorativa: brilho, território, carta e painel só entram quando representam fundamento, status, tarefa, sessão, evidência ou próximo passo.
+
+### Referência canônica
+
+A home atual em `src/app/page.tsx` e `src/app/page.module.css` é a referência canônica da identidade visual do StudyOps. Novas telas devem partir dela como linguagem-base: fundo de comando escuro, mapa/território como metáfora de progresso, painéis operacionais densos, cartas claras como objetos de missão e estados visuais ligados a ação real.
+
+O documento `docs/design/home-canonica.md` registra como aplicar essa referência sem copiar a home literalmente para todas as telas. Quando houver conflito entre um padrão antigo e a home atual, a home vence para superfícies novas ou redesenhadas.
 
 **Key Characteristics:**
 
@@ -116,6 +140,8 @@ A home usa uma composição de duas zonas: mapa dominante à esquerda e briefing
 
 O mundo completo aparece como regiões: Bloco 1 ativo, blocos futuros apagados. O layout deve deixar claro que o app atual cobre só a primeira região, mas que a trilha completa tem escala maior.
 
+Telas internas não precisam repetir o mapa orbital. Elas devem preservar a lógica da home: uma área principal para o objeto de estudo, uma área secundária para contexto/proximo passo quando útil, e cards apenas quando representarem tarefas, sessões, evidências ou decisões. Evite transformar páginas de leitura em dashboards decorativos.
+
 ## Elevation & Depth
 
 Depth vem de camadas tonais, glow funcional e sombras duras de carta. Painéis operacionais usam pouco arredondamento e bordas finas. Cartas de missão podem ter sombra deslocada para lembrar peças físicas sobre mesa.
@@ -138,12 +164,14 @@ Hexágonos representam território e fundamento. Cards usam retângulos de canto
 - **Shape:** retângulo com raio baixo e borda forte.
 - **Color:** painel claro sobre mundo escuro.
 - **Content:** tipo, título, resumo curto, evidência esperada ou ação.
+- **Behavior:** hover e foco podem reforçar a sensação de peça física, mas sem deslocar layout de forma agressiva.
 
 ### Operational Panels
 
 - **Shape:** painéis densos com borda fina.
 - **Color:** fundos escuros translúcidos ou tonais.
 - **Content:** briefing, progresso, links de ação e contexto da região ativa.
+- **Data Rule:** barras, contadores e sinais devem representar conteúdo existente ou estado explicitamente derivado. Não usar percentuais aparentes quando não houver progresso persistido.
 
 ### Buttons
 
@@ -157,6 +185,8 @@ Hexágonos representam território e fundamento. Cards usam retângulos de canto
 - Do: usar cards como objetos de missão, não como cards genéricos de dashboard.
 - Do: mostrar regiões futuras apagadas para dar escala ao StudyOps.
 - Do: conectar cor e brilho a progresso, foco e evidência.
+- Do: usar a home como referência canônica para novas superfícies visuais.
 - Don't: transformar estudo em pontuação vazia, ranking artificial ou conquistas sem evidência.
 - Don't: usar paleta monocromática verde ou visual SaaS genérico.
 - Don't: esconder o próximo passo em decoração.
+- Don't: copiar o mapa orbital para telas onde ele não ajuda a tarefa principal.

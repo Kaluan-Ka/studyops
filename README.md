@@ -16,7 +16,18 @@ Supabase em uma etapa posterior.
 - Script Node/TypeScript para validacao e criacao de conteudo
 - Supabase e Vercel planejados para os proximos incrementos
 
+## Design
 
+A home atual e a referencia canonica da identidade visual do StudyOps. Ela define
+o produto como um Centro de Comando Orbital: mapa de fundamentos, briefing
+operacional, territorios futuros apagados e cartas de missao.
+
+Antes de criar ou redesenhar telas, use:
+
+- `DESIGN.md`
+- `docs/design/home-canonica.md`
+- `src/app/page.tsx`
+- `src/app/page.module.css`
 
 ## Scripts
 
