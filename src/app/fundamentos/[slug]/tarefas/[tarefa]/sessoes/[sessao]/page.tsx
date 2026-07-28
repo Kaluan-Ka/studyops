@@ -51,7 +51,7 @@ export default async function TaskSessionPage({ params }: PageProps) {
         <p className={styles.breadcrumb}>
           <Link href={`/fundamentos/${task.fundament.slug}`}>{task.fundament.title}</Link> / {task.title} / Sessao {section.order}
         </p>
-        <section className={styles.readingShell} aria-labelledby="sessao-titulo">
+        <article className={styles.readingShell} aria-labelledby="sessao-titulo">
           <header className={styles.readingHeaderPanel}>
             <p className={styles.eyebrow}>Briefing de missao · Sessao {section.order} de {task.sections.length}</p>
             <h1 id="sessao-titulo">{section.title}</h1>
@@ -66,7 +66,7 @@ export default async function TaskSessionPage({ params }: PageProps) {
               </div>
             </dl>
           </header>
-          <article className={styles.readingArticle}>
+          <div className={styles.readingArticle}>
             <MarkdownContent markdown={section.markdown} />
             <StudyNote
               noteKey={makeNoteKey({
@@ -81,8 +81,8 @@ export default async function TaskSessionPage({ params }: PageProps) {
               previous={previous ? { href: `/fundamentos/${task.fundament.slug}/tarefas/${task.slug}/sessoes/${previous.slug}`, title: previous.title } : undefined}
               next={next ? { href: `/fundamentos/${task.fundament.slug}/tarefas/${task.slug}/sessoes/${next.slug}`, title: next.title } : undefined}
             />
-          </article>
-        </section>
+          </div>
+        </article>
       </main>
     </div>
   );

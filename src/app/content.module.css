@@ -49,7 +49,7 @@
 .studyNoteTextarea:focus-visible,
 .studyNoteSave:focus-visible,
 .studyNoteClear:focus-visible {
-  outline: 3px solid #69d8ff;
+  outline: 3px solid #1d6a51;
   outline-offset: 3px;
 }
 
