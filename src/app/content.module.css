@@ -44,6 +44,15 @@
   text-underline-offset: 3px;
 }
 
+.markdown a:focus-visible,
+.navigationLink:focus-visible,
+.studyNoteTextarea:focus-visible,
+.studyNoteSave:focus-visible,
+.studyNoteClear:focus-visible {
+  outline: 3px solid #69d8ff;
+  outline-offset: 3px;
+}
+
 .markdown code {
   padding: 2px 5px;
   border-radius: 4px;
@@ -190,9 +199,7 @@
   resize: vertical;
 }
 
-.studyNoteTextarea:focus {
-  outline: 3px solid rgba(45, 107, 85, 0.2);
-  outline-offset: 1px;
+.studyNoteTextarea:focus-visible {
   border-color: #2d6b55;
 }
 
