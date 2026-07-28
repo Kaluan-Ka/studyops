@@ -40,7 +40,10 @@
 .textLink:focus-visible,
 .primaryLink:focus-visible,
 .secondaryLink:focus-visible,
-.backLink:focus-visible {
+.backLink:focus-visible,
+.readingNode:focus-visible,
+.taskLink:focus-visible,
+.sourcesList a:focus-visible {
   outline: 3px solid #69d8ff;
   outline-offset: 4px;
 }
@@ -920,7 +923,7 @@
 .regionHero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.42fr);
   gap: 24px;
   margin-top: 22px;
   padding: clamp(24px, 4vw, 42px);
@@ -1052,6 +1055,16 @@
 .readingNode small {
   margin-top: auto;
   color: #b7c9c7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .readingNode {
+    transition: none;
+  }
+
+  .readingNode:hover {
+    transform: none;
+  }
 }
 
 .routeCard {
@@ -1200,6 +1213,10 @@
   .summaryGrid,
   .sessionGrid,
   .taskListLarge {
+    grid-template-columns: 1fr;
+  }
+
+  .regionHero {
     grid-template-columns: 1fr;
   }
 
