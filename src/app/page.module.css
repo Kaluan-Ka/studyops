@@ -45,6 +45,7 @@
 .taskLink:focus-visible,
 .taskCard:focus-visible,
 .missionSessionCard:focus-visible,
+.breadcrumb a:focus-visible,
 .sourcesList a:focus-visible {
   outline: 3px solid #69d8ff;
   outline-offset: 4px;
@@ -689,6 +690,20 @@
   text-underline-offset: 3px;
 }
 
+.regionMain .breadcrumb,
+.routeMain .breadcrumb,
+.missionMain .breadcrumb,
+.readingMain .breadcrumb {
+  color: #b7c9c7;
+}
+
+.regionMain .breadcrumb a,
+.routeMain .breadcrumb a,
+.missionMain .breadcrumb a,
+.readingMain .breadcrumb a {
+  color: #8bf28e;
+}
+
 .detailHero {
   padding: 42px 0 40px;
 }
@@ -1125,6 +1140,14 @@
   color: #f8f1d0;
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1.06;
+}
+
+.routeHero .detailLead {
+  color: #d9e8e1;
+}
+
+.routeHero .evidenceHint {
+  color: #b7c9c7;
 }
 
 .missionCard {
