@@ -31,13 +31,13 @@ export default async function StepPage({ params }: PageProps) {
         <Link href="/" className={styles.brand}>StudyOps</Link>
         <Link href={`/fundamentos/${fundament.slug}`} className={styles.backLink}>Voltar ao fundamento</Link>
       </header>
-      <main className={styles.detailMain}>
+      <main className={styles.routeMain}>
         <p className={styles.breadcrumb}>
           <Link href={`/fundamentos/${fundament.slug}`}>{fundament.title}</Link> / {step.title}
         </p>
-        <section className={styles.detailHero}>
-          <p className={styles.eyebrow}>Etapa {step.order}</p>
-          <h1>{step.title}</h1>
+        <section className={styles.routeHero} aria-labelledby="etapa-titulo">
+          <p className={styles.eyebrow}>Rota {step.order} · Sub-regiao pratica</p>
+          <h1 id="etapa-titulo">{step.title}</h1>
           <p className={styles.detailLead}>
             Escolha uma tarefa pequena, produza a evidencia esperada e avance sem perder a relacao com o fundamento.
           </p>
@@ -46,18 +46,18 @@ export default async function StepPage({ params }: PageProps) {
           </p>
         </section>
 
-        <section className={styles.detailSection} aria-labelledby="tarefas-titulo">
+        <section className={styles.missionSectionDeck} aria-labelledby="tarefas-titulo">
           <div className={styles.sectionHeader}>
             <div>
-              <p className={styles.sectionKicker}>Pratica guiada</p>
-              <h2 id="tarefas-titulo">Tarefas desta etapa</h2>
+              <p className={styles.sectionKicker}>Deck da rota</p>
+              <h2 id="tarefas-titulo">Missoes desta etapa</h2>
             </div>
-            <span>{step.tasks.length} tarefas</span>
+            <span>{step.tasks.length} missoes</span>
           </div>
           <div className={styles.taskListLarge}>
             {step.tasks.map((task) => (
               <Link key={task.id} href={`/fundamentos/${fundament.slug}/tarefas/${task.slug}`} className={styles.taskCard}>
-                <span>Tarefa {task.order.toString().padStart(2, "0")}</span>
+                <span>Missao {task.order.toString().padStart(2, "0")}</span>
                 <strong>{task.title}</strong>
                 <p>{task.intro}</p>
                 <small>Esperado: {task.expectedEvidence.join(", ") || "evidencia registrada"}</small>
