@@ -911,6 +911,182 @@
   line-height: 1.5;
 }
 
+.regionMain {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 36px 0 82px;
+}
+
+.regionHero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
+  gap: 24px;
+  margin-top: 22px;
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid rgba(183, 201, 199, 0.2);
+  border-radius: 14px;
+  background:
+    linear-gradient(rgba(105, 216, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(105, 216, 255, 0.06) 1px, transparent 1px),
+    rgba(7, 16, 22, 0.76);
+  background-size: 34px 34px;
+  overflow: hidden;
+}
+
+.regionSignal {
+  position: absolute;
+  right: clamp(22px, 5vw, 72px);
+  bottom: -26px;
+  display: grid;
+  width: 180px;
+  height: 158px;
+  place-items: center;
+  background: linear-gradient(145deg, rgba(105, 216, 255, 0.9), rgba(139, 242, 142, 0.92));
+  color: #071016;
+  clip-path: polygon(24% 4%, 76% 4%, 100% 50%, 76% 96%, 24% 96%, 0 50%);
+  box-shadow: 0 0 44px rgba(105, 216, 255, 0.34);
+  opacity: 0.32;
+}
+
+.regionSignal span {
+  font-size: 54px;
+  font-weight: 950;
+  font-variant-numeric: tabular-nums;
+}
+
+.regionBrief,
+.regionStats {
+  position: relative;
+  z-index: 1;
+}
+
+.regionBrief h1 {
+  max-width: 780px;
+  margin-top: 10px;
+  color: #f8f1d0;
+  font-size: clamp(38px, 6vw, 66px);
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.regionStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-content: end;
+  margin: 0;
+}
+
+.regionStats div {
+  padding: 14px;
+  border: 1px solid rgba(183, 201, 199, 0.2);
+  background: rgba(16, 23, 37, 0.82);
+}
+
+.regionStats dt {
+  color: #69d8ff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.regionStats dd {
+  margin: 7px 0 0;
+  color: #ffd45d;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.sourceDock,
+.readingRoute,
+.routeDeck {
+  margin-top: 28px;
+}
+
+.sourceDock {
+  padding: 20px;
+  border: 1px solid rgba(105, 216, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(7, 16, 22, 0.64);
+}
+
+.readingNode {
+  display: flex;
+  min-height: 132px;
+  flex-direction: column;
+  gap: 9px;
+  padding: 18px;
+  border: 1px solid rgba(105, 216, 255, 0.28);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(105, 216, 255, 0.12), transparent 46%),
+    rgba(16, 23, 37, 0.8);
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.readingNode:hover {
+  border-color: rgba(139, 242, 142, 0.66);
+  background:
+    linear-gradient(135deg, rgba(139, 242, 142, 0.12), transparent 46%),
+    rgba(16, 23, 37, 0.92);
+  transform: translateY(-2px);
+}
+
+.readingNode span {
+  color: #69d8ff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.readingNode strong {
+  color: #edf6f1;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.readingNode small {
+  margin-top: auto;
+  color: #b7c9c7;
+}
+
+.routeCard {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding: 22px 22px 22px 78px;
+  border: 1px solid rgba(183, 201, 199, 0.2);
+  border-radius: 8px;
+  background: rgba(7, 16, 22, 0.7);
+  overflow: hidden;
+}
+
+.routeLine {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(139, 242, 142, 0.5);
+  background: rgba(139, 242, 142, 0.12);
+  color: #8bf28e;
+  font-size: 13px;
+  font-weight: 950;
+  font-variant-numeric: tabular-nums;
+}
+
+.missionLinks {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+}
+
 @media (max-width: 1120px) {
   .commandDeck {
     grid-template-columns: 1fr;
