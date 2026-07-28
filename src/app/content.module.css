@@ -141,11 +141,31 @@
 }
 
 .studyNote {
+  position: relative;
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
+  gap: 0;
   margin-top: 44px;
+  border: 1px solid #c7d4cc;
+  border-radius: 8px;
+  background: #f3f6ee;
+  color: #071016;
+  box-shadow: 8px 8px 0 rgba(7, 16, 22, 0.12);
+  overflow: hidden;
+}
+
+.studyNoteRail {
+  background:
+    repeating-linear-gradient(
+      180deg,
+      #ffd45d 0 16px,
+      #8bf28e 16px 28px,
+      #69d8ff 28px 40px
+    );
+}
+
+.studyNoteBody {
   padding: 24px;
-  border: 1px solid #cddbd0;
-  border-radius: 10px;
-  background: #f4f8f4;
 }
 
 .studyNoteHeader {
@@ -156,21 +176,23 @@
 }
 
 .studyNoteKicker {
-  color: #2d6b55;
-  font-size: 12px;
-  font-weight: 750;
-  letter-spacing: 0.08em;
+  color: #1d6a51;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .studyNote h2 {
   margin-top: 6px;
-  color: #17211d;
+  color: #071016;
   font-size: 24px;
+  line-height: 1.18;
 }
 
 .studyNoteStatus {
-  color: #607269;
+  max-width: 220px;
+  color: #4b5c54;
   font-size: 13px;
   line-height: 1.4;
   text-align: right;
@@ -179,9 +201,9 @@
 .studyNoteLabel {
   display: block;
   margin-top: 22px;
-  color: #33443b;
+  color: #2c3b34;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .studyNoteTextarea {
@@ -190,17 +212,17 @@
   min-height: 150px;
   margin-top: 8px;
   padding: 12px 14px;
-  border: 1px solid #bdcec1;
+  border: 1px solid #b6c6bb;
   border-radius: 6px;
-  background: #fff;
-  color: #17211d;
+  background: #fffef8;
+  color: #071016;
   font: inherit;
   line-height: 1.55;
   resize: vertical;
 }
 
 .studyNoteTextarea:focus-visible {
-  border-color: #2d6b55;
+  border-color: #1d6a51;
 }
 
 .studyNoteActions {
@@ -214,23 +236,23 @@
 .studyNoteClear {
   min-height: 40px;
   padding: 8px 13px;
-  border-radius: 5px;
+  border-radius: 4px;
   font: inherit;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 850;
   cursor: pointer;
 }
 
 .studyNoteSave {
-  border: 1px solid #203f35;
-  background: #203f35;
-  color: #fff;
+  border: 1px solid #071016;
+  background: #8bf28e;
+  color: #071016;
 }
 
 .studyNoteClear {
-  border: 1px solid #aebeb2;
+  border: 1px solid #8fa096;
   background: transparent;
-  color: #365548;
+  color: #263a31;
 }
 
 .studyNoteSave:disabled,

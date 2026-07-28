@@ -90,32 +90,35 @@ export function StudyNote({ noteKey, label }: StudyNoteProps) {
 
   return (
     <section className={styles.studyNote} aria-labelledby={`${noteKey}-label`}>
-      <div className={styles.studyNoteHeader}>
-        <div>
-          <p className={styles.studyNoteKicker}>Registro local</p>
-          <h2 id={`${noteKey}-label`}>{label}</h2>
+      <div className={styles.studyNoteRail} aria-hidden="true" />
+      <div className={styles.studyNoteBody}>
+        <div className={styles.studyNoteHeader}>
+          <div>
+            <p className={styles.studyNoteKicker}>Logbook tecnico</p>
+            <h2 id={`${noteKey}-label`}>{label}</h2>
+          </div>
+          <span className={styles.studyNoteStatus} aria-live="polite">{statusMessage}</span>
         </div>
-        <span className={styles.studyNoteStatus} aria-live="polite">{statusMessage}</span>
-      </div>
-      <label className={styles.studyNoteLabel} htmlFor={`${noteKey}-input`}>
-        O que voce quer lembrar desta leitura?
-      </label>
-      <textarea
-        id={`${noteKey}-input`}
-        className={styles.studyNoteTextarea}
-        value={text}
-        onChange={(event) => handleChange(event.target.value)}
-        placeholder="Registre uma ideia, duvida, resultado ou proximo passo..."
-        rows={7}
-        disabled={state === "loading"}
-      />
-      <div className={styles.studyNoteActions}>
-        <button type="button" className={styles.studyNoteSave} onClick={handleSave} disabled={state === "loading" || state === "error"}>
-          Salvar anotacao
-        </button>
-        <button type="button" className={styles.studyNoteClear} onClick={handleClear} disabled={state === "loading" || (!text && !savedText)}>
-          Limpar
-        </button>
+        <label className={styles.studyNoteLabel} htmlFor={`${noteKey}-input`}>
+          Evidencia, duvida, resultado ou proximo passo
+        </label>
+        <textarea
+          id={`${noteKey}-input`}
+          className={styles.studyNoteTextarea}
+          value={text}
+          onChange={(event) => handleChange(event.target.value)}
+          placeholder="Registre uma observacao tecnica, decisao, teste, falha ou proxima aplicacao..."
+          rows={7}
+          disabled={state === "loading"}
+        />
+        <div className={styles.studyNoteActions}>
+          <button type="button" className={styles.studyNoteSave} onClick={handleSave} disabled={state === "loading" || state === "error"}>
+            Salvar registro
+          </button>
+          <button type="button" className={styles.studyNoteClear} onClick={handleClear} disabled={state === "loading" || (!text && !savedText)}>
+            Limpar
+          </button>
+        </div>
       </div>
     </section>
   );
