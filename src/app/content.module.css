@@ -282,4 +282,12 @@
   .studyNoteStatus {
     text-align: left;
   }
+
+  .studyNote {
+    grid-template-columns: 8px minmax(0, 1fr);
+  }
+
+  .studyNoteBody {
+    padding: 20px 16px;
+  }
 }

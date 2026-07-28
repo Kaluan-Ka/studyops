@@ -1035,6 +1035,15 @@
   letter-spacing: 0;
 }
 
+.regionHero .detailLead,
+.regionHero .intro {
+  color: #b7c9c7;
+}
+
+.regionHero .intro {
+  border-top-color: rgba(183, 201, 199, 0.2);
+}
+
 .regionStats {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1076,6 +1085,10 @@
   border: 1px solid rgba(105, 216, 255, 0.22);
   border-radius: 8px;
   background: rgba(7, 16, 22, 0.64);
+}
+
+.sourceDock .sourcesList a {
+  color: #8bf28e;
 }
 
 .readingNode {
@@ -1138,6 +1151,31 @@
   border-radius: 8px;
   background: rgba(7, 16, 22, 0.7);
   overflow: hidden;
+}
+
+.routeCard .stepHeading span {
+  color: #69d8ff;
+}
+
+.routeCard .stepHeading h3 {
+  color: #edf6f1;
+}
+
+.routeCard .evidenceHint {
+  color: #b7c9c7;
+}
+
+.routeCard .textLink,
+.routeCard .taskLink {
+  color: #8bf28e;
+}
+
+.routeCard .taskLink {
+  border-top-color: rgba(183, 201, 199, 0.26);
+}
+
+.routeCard .taskLink span {
+  color: #ffd45d;
 }
 
 .routeLine {
@@ -1424,7 +1462,8 @@
     grid-template-columns: 1fr;
   }
 
-  .regionHero {
+  .regionHero,
+  .readingMeta {
     grid-template-columns: 1fr;
   }
 
@@ -1435,12 +1474,32 @@
   .stepHeading {
     flex-direction: column;
   }
+
+  .routeCard {
+    padding: 76px 18px 18px;
+  }
+
+  .routeLine {
+    left: 18px;
+    top: 18px;
+  }
 }
 
 @media (max-width: 370px) {
   .header,
   .main {
     width: min(1240px, calc(100% - 28px));
+  }
+
+  .regionMain,
+  .routeMain,
+  .missionMain,
+  .readingMain {
+    width: min(980px, calc(100% - 28px));
+  }
+
+  .regionStats {
+    grid-template-columns: 1fr;
   }
 
   .mapPanel {
