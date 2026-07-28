@@ -51,24 +51,38 @@ export default async function TaskSessionPage({ params }: PageProps) {
         <p className={styles.breadcrumb}>
           <Link href={`/fundamentos/${task.fundament.slug}`}>{task.fundament.title}</Link> / {task.title} / Sessao {section.order}
         </p>
-        <article className={styles.readingArticle}>
-          <p className={styles.eyebrow}>Sessao {section.order} de {task.sections.length}</p>
-          <h1>{section.title}</h1>
-          <MarkdownContent markdown={section.markdown} />
-          <StudyNote
-            noteKey={makeNoteKey({
-              scope: "task-session",
-              fundamentSlug: task.fundament.slug,
-              taskSlug: task.slug,
-              sessionSlug: section.slug,
-            })}
-            label="Anotacao desta sessao da tarefa"
-          />
-          <ContentNavigation
-            previous={previous ? { href: `/fundamentos/${task.fundament.slug}/tarefas/${task.slug}/sessoes/${previous.slug}`, title: previous.title } : undefined}
-            next={next ? { href: `/fundamentos/${task.fundament.slug}/tarefas/${task.slug}/sessoes/${next.slug}`, title: next.title } : undefined}
-          />
-        </article>
+        <section className={styles.readingShell} aria-labelledby="sessao-titulo">
+          <header className={styles.readingHeaderPanel}>
+            <p className={styles.eyebrow}>Briefing de missao · Sessao {section.order} de {task.sections.length}</p>
+            <h1 id="sessao-titulo">{section.title}</h1>
+            <dl className={styles.readingMeta}>
+              <div>
+                <dt>Missao</dt>
+                <dd>{task.title}</dd>
+              </div>
+              <div>
+                <dt>Registro</dt>
+                <dd>Logbook local</dd>
+              </div>
+            </dl>
+          </header>
+          <article className={styles.readingArticle}>
+            <MarkdownContent markdown={section.markdown} />
+            <StudyNote
+              noteKey={makeNoteKey({
+                scope: "task-session",
+                fundamentSlug: task.fundament.slug,
+                taskSlug: task.slug,
+                sessionSlug: section.slug,
+              })}
+              label="Registro de campo desta sessao"
+            />
+            <ContentNavigation
+              previous={previous ? { href: `/fundamentos/${task.fundament.slug}/tarefas/${task.slug}/sessoes/${previous.slug}`, title: previous.title } : undefined}
+              next={next ? { href: `/fundamentos/${task.fundament.slug}/tarefas/${task.slug}/sessoes/${next.slug}`, title: next.title } : undefined}
+            />
+          </article>
+        </section>
       </main>
     </div>
   );

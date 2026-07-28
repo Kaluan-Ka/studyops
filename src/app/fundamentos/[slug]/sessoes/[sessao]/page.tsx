@@ -42,23 +42,37 @@ export default async function FundamentSessionPage({ params }: PageProps) {
         <p className={styles.breadcrumb}>
           <Link href={`/fundamentos/${fundament.slug}`}>{fundament.title}</Link> / Sessao {section.order}
         </p>
-        <article className={styles.readingArticle}>
-          <p className={styles.eyebrow}>Sessao {section.order} de {fundament.sections.length}</p>
-          <h1>{section.title}</h1>
-          <MarkdownContent markdown={section.markdown} />
-          <StudyNote
-            noteKey={makeNoteKey({
-              scope: "fundament-session",
-              fundamentSlug: fundament.slug,
-              sessionSlug: section.slug,
-            })}
-            label="Anotacao desta sessao"
-          />
-          <ContentNavigation
-            previous={previous ? { href: `/fundamentos/${fundament.slug}/sessoes/${previous.slug}`, title: previous.title } : undefined}
-            next={next ? { href: `/fundamentos/${fundament.slug}/sessoes/${next.slug}`, title: next.title } : undefined}
-          />
-        </article>
+        <section className={styles.readingShell} aria-labelledby="sessao-titulo">
+          <header className={styles.readingHeaderPanel}>
+            <p className={styles.eyebrow}>Briefing de leitura · Sessao {section.order} de {fundament.sections.length}</p>
+            <h1 id="sessao-titulo">{section.title}</h1>
+            <dl className={styles.readingMeta}>
+              <div>
+                <dt>Fundamento</dt>
+                <dd>{fundament.title}</dd>
+              </div>
+              <div>
+                <dt>Registro</dt>
+                <dd>Logbook local</dd>
+              </div>
+            </dl>
+          </header>
+          <article className={styles.readingArticle}>
+            <MarkdownContent markdown={section.markdown} />
+            <StudyNote
+              noteKey={makeNoteKey({
+                scope: "fundament-session",
+                fundamentSlug: fundament.slug,
+                sessionSlug: section.slug,
+              })}
+              label="Registro de campo desta sessao"
+            />
+            <ContentNavigation
+              previous={previous ? { href: `/fundamentos/${fundament.slug}/sessoes/${previous.slug}`, title: previous.title } : undefined}
+              next={next ? { href: `/fundamentos/${fundament.slug}/sessoes/${next.slug}`, title: next.title } : undefined}
+            />
+          </article>
+        </section>
       </main>
     </div>
   );

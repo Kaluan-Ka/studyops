@@ -679,6 +679,55 @@
   width: min(820px, calc(100% - 40px));
 }
 
+.readingShell {
+  margin-top: 22px;
+}
+
+.readingHeaderPanel {
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid rgba(105, 216, 255, 0.22);
+  border-radius: 10px 10px 0 0;
+  background:
+    linear-gradient(135deg, rgba(105, 216, 255, 0.12), transparent 42%),
+    rgba(7, 16, 22, 0.78);
+}
+
+.readingHeaderPanel h1 {
+  max-width: 780px;
+  margin-top: 10px;
+  color: #f8f1d0;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.07;
+}
+
+.readingMeta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0 0;
+}
+
+.readingMeta div {
+  padding: 12px;
+  border: 1px solid rgba(183, 201, 199, 0.18);
+  background: rgba(16, 23, 37, 0.68);
+}
+
+.readingMeta dt {
+  color: #69d8ff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.readingMeta dd {
+  margin: 6px 0 0;
+  color: #edf6f1;
+  font-size: 14px;
+  font-weight: 750;
+}
+
 .breadcrumb {
   color: #6a7b71;
   font-size: 14px;
@@ -879,16 +928,12 @@
 }
 
 .readingArticle {
-  margin-top: 36px;
-  padding: clamp(24px, 5vw, 54px);
+  padding: clamp(22px, 5vw, 52px);
   border: 1px solid #dbe4dc;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.76);
-}
-
-.readingArticle h1 {
-  margin-bottom: 38px;
-  font-size: clamp(34px, 5vw, 52px);
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  background: rgba(238, 242, 230, 0.96);
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.24);
 }
 
 .summaryGrid {
