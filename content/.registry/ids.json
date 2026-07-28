@@ -2,6 +2,66 @@
   "version": 1,
   "issued": {
     "fundamentos": [
+      "FUN-000006",
+      "FUN-000007",
+      "FUN-000008",
+      "FUN-000009",
+      "FUN-000010"
+    ],
+    "steps": [
+      "STEP-000016",
+      "STEP-000017",
+      "STEP-000018",
+      "STEP-000019",
+      "STEP-000020",
+      "STEP-000021",
+      "STEP-000022",
+      "STEP-000023",
+      "STEP-000024",
+      "STEP-000025",
+      "STEP-000026",
+      "STEP-000027",
+      "STEP-000028",
+      "STEP-000029",
+      "STEP-000030"
+    ],
+    "tasks": [
+      "TASK-000031",
+      "TASK-000032",
+      "TASK-000033",
+      "TASK-000034",
+      "TASK-000035",
+      "TASK-000036",
+      "TASK-000037",
+      "TASK-000038",
+      "TASK-000039",
+      "TASK-000040",
+      "TASK-000041",
+      "TASK-000042",
+      "TASK-000043",
+      "TASK-000044",
+      "TASK-000045",
+      "TASK-000046",
+      "TASK-000047",
+      "TASK-000048",
+      "TASK-000049",
+      "TASK-000050",
+      "TASK-000051",
+      "TASK-000052",
+      "TASK-000053",
+      "TASK-000054",
+      "TASK-000055",
+      "TASK-000056",
+      "TASK-000057",
+      "TASK-000058",
+      "TASK-000059",
+      "TASK-000060"
+    ],
+    "projects": [],
+    "evidence": []
+  },
+  "deprecated": {
+    "fundamentos": [
       "FUN-000001",
       "FUN-000002",
       "FUN-000003",
@@ -56,9 +116,6 @@
       "TASK-000028",
       "TASK-000029",
       "TASK-000030"
-    ],
-    "projects": [],
-    "evidence": []
-  },
-  "deprecated": {}
+    ]
+  }
 }

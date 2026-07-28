@@ -1,0 +1,256 @@
+.markdown {
+  color: #33443b;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.markdown h3,
+.markdown h4 {
+  margin: 28px 0 10px;
+  color: #17211d;
+  line-height: 1.25;
+}
+
+.markdown h3 {
+  font-size: 24px;
+}
+
+.markdown h4 {
+  font-size: 20px;
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote,
+.markdown pre,
+.markdown table {
+  margin-top: 16px;
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 24px;
+}
+
+.markdown li + li {
+  margin-top: 8px;
+}
+
+.markdown a {
+  color: #1e6d53;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.markdown code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: #e8f0ea;
+  color: #204a39;
+  font-size: 0.9em;
+}
+
+.markdown pre {
+  overflow-x: auto;
+  padding: 18px;
+  border: 1px solid #d3dfd5;
+  border-radius: 8px;
+  background: #17211d;
+  color: #edf7ef;
+}
+
+.markdown pre code {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 0.88em;
+}
+
+.markdown blockquote {
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid #83a995;
+  color: #53655b;
+}
+
+.markdown table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.markdown th,
+.markdown td {
+  min-width: 150px;
+  padding: 10px 12px;
+  border: 1px solid #d3dfd5;
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown th {
+  background: #e8f0ea;
+  color: #204a39;
+  font-size: 14px;
+}
+
+.contentNavigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.navigationLink {
+  display: flex;
+  min-height: 78px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 14px 18px;
+  border: 1px solid #d3dfd5;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.navigationLink span {
+  color: #688074;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.navigationLink strong {
+  color: #204a39;
+}
+
+.navigationNext {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.studyNote {
+  margin-top: 44px;
+  padding: 24px;
+  border: 1px solid #cddbd0;
+  border-radius: 10px;
+  background: #f4f8f4;
+}
+
+.studyNoteHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.studyNoteKicker {
+  color: #2d6b55;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.studyNote h2 {
+  margin-top: 6px;
+  color: #17211d;
+  font-size: 24px;
+}
+
+.studyNoteStatus {
+  color: #607269;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.studyNoteLabel {
+  display: block;
+  margin-top: 22px;
+  color: #33443b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.studyNoteTextarea {
+  display: block;
+  width: 100%;
+  min-height: 150px;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px solid #bdcec1;
+  border-radius: 6px;
+  background: #fff;
+  color: #17211d;
+  font: inherit;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.studyNoteTextarea:focus {
+  outline: 3px solid rgba(45, 107, 85, 0.2);
+  outline-offset: 1px;
+  border-color: #2d6b55;
+}
+
+.studyNoteActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.studyNoteSave,
+.studyNoteClear {
+  min-height: 40px;
+  padding: 8px 13px;
+  border-radius: 5px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.studyNoteSave {
+  border: 1px solid #203f35;
+  background: #203f35;
+  color: #fff;
+}
+
+.studyNoteClear {
+  border: 1px solid #aebeb2;
+  background: transparent;
+  color: #365548;
+}
+
+.studyNoteSave:disabled,
+.studyNoteClear:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .markdown {
+    font-size: 16px;
+  }
+
+  .contentNavigation {
+    grid-template-columns: 1fr;
+  }
+
+  .navigationNext {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .studyNoteHeader {
+    flex-direction: column;
+  }
+
+  .studyNoteStatus {
+    text-align: left;
+  }
+}

@@ -9,13 +9,16 @@
     "start": "next start",
     "lint": "eslint",
     "content:validate": "tsx scripts/content.ts validate",
-    "content:create": "tsx scripts/content.ts create"
+    "content:create": "tsx scripts/content.ts create",
+    "test": "tsx --test tests/*.test.ts"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
     "next": "16.2.10",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

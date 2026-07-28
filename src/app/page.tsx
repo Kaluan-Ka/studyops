@@ -1,82 +1,104 @@
+import Link from "next/link";
+
+import { getFundamentos } from "@/lib/content";
+
 import styles from "./page.module.css";
 
-const fundamentos = [
-  {
-    nome: "Hash Table",
-    status: "Primeiro fundamento",
-    progresso: "0%",
-    proximoPasso: "Implementar hashmap minimo e comparar busca linear vs indexada.",
-  },
-  {
-    nome: "Cache",
-    status: "Em preparo",
-    progresso: "0%",
-    proximoPasso: "Conectar politica de cache ao Mini Redis aplicado a IA.",
-  },
-  {
-    nome: "Busca textual",
-    status: "Em preparo",
-    progresso: "0%",
-    proximoPasso: "Preparar demo de indice textual para o Local Research Searcher.",
-  },
-];
+function countSessions(fundamentos: ReturnType<typeof getFundamentos>): number {
+  return fundamentos.reduce(
+    (total, fundament) =>
+      total +
+      fundament.sections.length +
+      fundament.tasks.reduce((taskTotal, task) => taskTotal + task.sections.length, 0),
+    0,
+  );
+}
 
 export default function Home() {
+  const fundamentos = getFundamentos();
+  const totalTasks = fundamentos.reduce((total, fundament) => total + fundament.tasks.length, 0);
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <strong>StudyOps</strong>
+        <Link href="/" className={styles.brand}>
+          StudyOps
+        </Link>
         <nav aria-label="Navegacao principal">
           <a href="#fundamentos">Fundamentos</a>
           <a href="#tarefas">Tarefas</a>
-          <a href="#evidencias">Evidencias</a>
+          <a href="#sessoes">Sessoes</a>
         </nav>
       </header>
+
       <main className={styles.main}>
         <section className={styles.hero} aria-labelledby="titulo">
-          <p className={styles.eyebrow}>MVP centrado em fundamentos</p>
-          <h1 id="titulo">Trilha de engenharia de IA com progresso rastreavel.</h1>
+          <p className={styles.eyebrow}>Conteudo curado em pequenas sessoes</p>
+          <h1 id="titulo">Aprenda engenharia de IA em ciclos que cabem na rotina.</h1>
           <p>
-            Organize fundamentos, tarefas praticas, projetos de portfolio e evidencias
-            produzidas em cada ciclo de estudo.
+            Cada fundamento combina explicacao, implementacao, aplicacao e evidencia. Abra uma
+            sessao por vez e avance pelo conteudo sem transformar o estudo em uma pagina infinita.
           </p>
         </section>
 
         <section id="fundamentos" className={styles.section} aria-labelledby="fundamentos-titulo">
           <div className={styles.sectionHeader}>
-            <h2 id="fundamentos-titulo">Fundamentos</h2>
-            <span>Conteudo versionado</span>
+            <div>
+              <p className={styles.sectionKicker}>Trilha do Bloco 1</p>
+              <h2 id="fundamentos-titulo">Fundamentos</h2>
+            </div>
+            <span>Markdown versionado</span>
           </div>
+
           <div className={styles.track}>
-            {fundamentos.map((fundamento, index) => (
-              <article className={styles.fundamento} key={fundamento.nome}>
-                <div className={styles.marker}>{index + 1}</div>
-                <div>
-                  <p>{fundamento.status}</p>
-                  <h3>{fundamento.nome}</h3>
-                  <span>Progresso {fundamento.progresso}</span>
-                </div>
-                <p>{fundamento.proximoPasso}</p>
-              </article>
-            ))}
+            {fundamentos.map((fundamento) => {
+              const firstSection = fundamento.sections[0];
+
+              return (
+                <article className={styles.fundamento} key={fundamento.id}>
+                  <div className={styles.marker}>{fundamento.order}</div>
+                  <div>
+                    <p className={styles.status}>{fundamento.status.replaceAll("_", " ")}</p>
+                    <h3>{fundamento.title}</h3>
+                    <p className={styles.cardSummary}>{fundamento.summary}</p>
+                  </div>
+                  <div className={styles.cardFooter}>
+                    <span>
+                      {fundamento.steps.length} etapas · {fundamento.tasks.length} tarefas
+                    </span>
+                    <Link href={`/fundamentos/${fundamento.slug}`} className={styles.textLink}>
+                      Ver fundamento
+                    </Link>
+                    {firstSection ? (
+                      <Link
+                        href={`/fundamentos/${fundamento.slug}/sessoes/${firstSection.slug}`}
+                        className={styles.primaryLink}
+                      >
+                        Comecar sessao
+                      </Link>
+                    ) : null}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
-        <section id="tarefas" className={styles.summaryGrid} aria-label="Resumo operacional">
+        <section id="tarefas" className={styles.summaryGrid} aria-label="Resumo do conteudo">
           <div>
-            <span>Tarefas</span>
-            <strong>1</strong>
-            <p>Primeira tarefa curada para validar o fluxo de conteudo.</p>
+            <span>Fundamentos</span>
+            <strong>{fundamentos.length}</strong>
+            <p>Capitulos curados para o primeiro bloco da trilha.</p>
           </div>
           <div>
-            <span>Projetos</span>
-            <strong>0</strong>
-            <p>Projetos entram depois da base de fundamentos e tarefas.</p>
+            <span>Tarefas praticas</span>
+            <strong>{totalTasks}</strong>
+            <p>Entregas pequenas ligadas a etapas e projetos de portfolio.</p>
           </div>
-          <div id="evidencias">
-            <span>Evidencias</span>
-            <strong>0</strong>
-            <p>Notas, commits e benchmarks serao vinculados ao progresso.</p>
+          <div id="sessoes">
+            <span>Sessoes de leitura</span>
+            <strong>{countSessions(fundamentos)}</strong>
+            <p>Blocos independentes para diluir a leitura e manter o proximo passo claro.</p>
           </div>
         </section>
       </main>

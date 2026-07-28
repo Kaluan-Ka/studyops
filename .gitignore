@@ -37,6 +37,22 @@ yarn-error.log*
 
 # env files
 .env*
+!.env.example
+
+# local tooling and visual references
+/.codex/
+/refes/
+
+# local credentials and data
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.sqlite
+*.sqlite3
+*.db
+*.dump
 
 # vercel
 .vercel
