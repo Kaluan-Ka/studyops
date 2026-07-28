@@ -41,6 +41,7 @@ yarn-error.log*
 
 # local tooling and visual references
 /.codex/
+/.superpowers/
 /refes/
 
 # local credentials and data
