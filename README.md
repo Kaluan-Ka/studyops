@@ -16,15 +16,7 @@ Supabase em uma etapa posterior.
 - Script Node/TypeScript para validacao e criacao de conteudo
 - Supabase e Vercel planejados para os proximos incrementos
 
-## Rodando localmente
 
-```bash
-npm install
-npm run content:validate
-npm run dev
-```
-
-Abra `http://localhost:3000`.
 
 ## Scripts
 
