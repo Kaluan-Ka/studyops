@@ -47,6 +47,8 @@ Use hexagonos para territorio, fundamento ou regiao de trilha. Tiles clicaveis d
 
 Use para resumir estado, contexto e proximo passo. Barras e sinais devem representar conteudo existente ou estado explicitamente derivado. Nao usar percentuais aparentes quando ainda nao houver progresso persistido.
 
+Decisao registrada em 2026-07-28: a home nao deve usar barra de progresso enquanto o progresso real ainda nao estiver persistido no Supabase. Ate la, o briefing deve usar contadores, inventario de conteudo, checklist ou sinais nao-percentuais. A barra volta quando houver dados reais de progresso do usuario, como evidencias concluidas, tarefas finalizadas ou ciclos registrados.
+
 **Cartas de missao**
 
 Use cartas claras sobre fundo escuro para tarefas, fundamentos, sessoes e evidencias esperadas. A carta deve carregar acao ou decisao; se for apenas agrupamento visual, use painel ou secao sem carta.
@@ -66,6 +68,7 @@ Use paineis escuros para contadores e contexto agregado. Contadores devem vir do
 - Garanta foco visivel em todos os links e controles.
 - Em mobile, preserve o mapa ou objeto principal antes do briefing.
 - Nao introduza IA, Supabase, importacao externa ou progresso persistido apenas por necessidade visual.
+- Reserve barras de progresso para progresso real vindo do Supabase; antes disso, use somente contadores e sinais de inventario.
 
 ## Criterio de compatibilidade
 

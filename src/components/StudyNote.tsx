@@ -63,7 +63,7 @@ export function StudyNote({ noteKey, label }: StudyNoteProps) {
   }
 
   function handleClear() {
-    if (!window.confirm("Limpar esta anotacao?")) {
+    if (!window.confirm("Limpar esta anotação?")) {
       return;
     }
 
@@ -81,11 +81,11 @@ export function StudyNote({ noteKey, label }: StudyNoteProps) {
   }
 
   const statusMessage = {
-    loading: "Carregando anotacao...",
-    empty: "Nenhuma anotacao salva.",
-    saved: "Anotacao salva neste navegador.",
-    dirty: "Alteracoes ainda nao salvas.",
-    error: "Nao foi possivel acessar as anotacoes neste navegador.",
+    loading: "Carregando anotação...",
+    empty: "Nenhuma anotação salva.",
+    saved: "Anotação salva neste navegador.",
+    dirty: "Alterações ainda não salvas.",
+    error: "Não foi possível acessar as anotações neste navegador.",
   }[state];
 
   return (
@@ -94,7 +94,7 @@ export function StudyNote({ noteKey, label }: StudyNoteProps) {
       <div className={styles.studyNoteBody}>
         <div className={styles.studyNoteHeader}>
           <div>
-            <p className={styles.studyNoteKicker}>Logbook tecnico</p>
+            <p className={styles.studyNoteKicker}>Logbook técnico</p>
             <h2 id={`${noteKey}-label`}>{label}</h2>
           </div>
           <span className={styles.studyNoteStatus} aria-live="polite">{statusMessage}</span>
@@ -107,7 +107,7 @@ export function StudyNote({ noteKey, label }: StudyNoteProps) {
           className={styles.studyNoteTextarea}
           value={text}
           onChange={(event) => handleChange(event.target.value)}
-          placeholder="Registre uma observacao tecnica, decisao, teste, falha ou proxima aplicacao..."
+          placeholder="Registre uma observação técnica, decisão, teste, falha ou próxima aplicação..."
           rows={7}
           disabled={state === "loading"}
         />

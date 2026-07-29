@@ -113,7 +113,7 @@ function part(value: string): string {
   const normalized = value.trim();
 
   if (!normalized) {
-    throw new Error("A chave da anotacao exige partes nao vazias");
+    throw new Error("A chave da anotação exige partes não vazias");
   }
 
   return normalized;

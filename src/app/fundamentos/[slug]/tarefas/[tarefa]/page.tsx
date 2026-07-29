@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { MissionBriefing } from "@/components/MissionBriefing";
 import { StudyNote } from "@/components/StudyNote";
 import { getFundamentos, getTaskBySlug } from "@/lib/content";
+import { buildTaskBriefing, formatEvidenceLabel, formatStatusLabel } from "@/lib/missionBriefing";
 import { makeNoteKey } from "@/lib/notes";
 
 import styles from "../../../../page.module.css";
@@ -28,6 +30,7 @@ export default async function TaskPage({ params }: PageProps) {
   }
 
   const step = task.fundament.steps.find((item) => item.id === task.stepId);
+  const briefing = buildTaskBriefing(task.fundament, task, step);
 
   return (
     <div className={styles.page}>
@@ -44,9 +47,9 @@ export default async function TaskPage({ params }: PageProps) {
         <section className={styles.missionCard} aria-labelledby="tarefa-titulo">
           <div className={styles.cardHeader}>
             <span className={styles.cardId}>TASK-{task.order.toString().padStart(3, "0")}</span>
-            <strong>{task.status.replaceAll("_", " ")}</strong>
+            <strong>{formatStatusLabel(task.status)}</strong>
           </div>
-          <p className={styles.eyebrow}>Carta de missao pratica</p>
+          <p className={styles.eyebrow}>Carta de missão prática</p>
           <h1 id="tarefa-titulo">{task.title}</h1>
           <p className={styles.detailLead}>{task.intro}</p>
           <dl className={styles.missionMeta}>
@@ -61,25 +64,29 @@ export default async function TaskPage({ params }: PageProps) {
               </div>
             ) : null}
             <div>
-              <dt>Sessoes</dt>
+              <dt>Sessões</dt>
               <dd>{task.sections.length}</dd>
             </div>
           </dl>
-          <p className={styles.missionEvidence}>Evidencias esperadas: {task.expectedEvidence.join(", ") || "a definir"}</p>
+          <p className={styles.missionEvidence}>
+            Evidências esperadas: {task.expectedEvidence.length ? task.expectedEvidence.map(formatEvidenceLabel).join(", ") : "a definir"}
+          </p>
         </section>
+
+        <MissionBriefing briefing={briefing} />
 
         <section className={styles.missionSectionDeck} aria-labelledby="sessoes-titulo">
           <div className={styles.sectionHeader}>
             <div>
-              <p className={styles.sectionKicker}>Briefing de execucao</p>
-              <h2 id="sessoes-titulo">Sessoes da missao</h2>
+              <p className={styles.sectionKicker}>Briefing de execução</p>
+              <h2 id="sessoes-titulo">Sessões da missão</h2>
             </div>
             <span>{task.sections.length} blocos</span>
           </div>
           <div className={styles.sessionGrid}>
             {task.sections.map((section) => (
               <Link key={section.slug} href={`/fundamentos/${task.fundament.slug}/tarefas/${task.slug}/sessoes/${section.slug}`} className={styles.missionSessionCard}>
-                <span>Sessao {section.order.toString().padStart(2, "0")}</span>
+                <span>Sessão {section.order.toString().padStart(2, "0")}</span>
                 <strong>{section.title}</strong>
                 <small>Executar briefing</small>
               </Link>
@@ -92,7 +99,7 @@ export default async function TaskPage({ params }: PageProps) {
             fundamentSlug: task.fundament.slug,
             taskSlug: task.slug,
           })}
-          label="Registro de campo da missao"
+          label="Registro de campo da missão"
         />
       </main>
     </div>

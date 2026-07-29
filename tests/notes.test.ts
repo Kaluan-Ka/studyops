@@ -36,18 +36,18 @@ test("monta chaves estaveis e distintas para tarefa e sessoes", () => {
 });
 
 test("serializa e restaura o payload versionado de anotacoes", () => {
-  const stored = writeNote(emptyNotes(), "task:cli/demo", "Uma observacao", "2026-07-27T12:00:00.000Z");
+  const stored = writeNote(emptyNotes(), "task:cli/demo", "Uma observação", "2026-07-27T12:00:00.000Z");
 
   const restored = parseStoredNotes(serializeStoredNotes(stored));
 
   assert.deepEqual(readNote(restored, "task:cli/demo"), {
-    text: "Uma observacao",
+    text: "Uma observação",
     updatedAt: "2026-07-27T12:00:00.000Z",
   });
 });
 
-test("ignora JSON invalido e formatos incompatíveis", () => {
-  assert.deepEqual(parseStoredNotes("nao e json"), emptyNotes());
+test("ignora JSON inválido e formatos incompatíveis", () => {
+  assert.deepEqual(parseStoredNotes("não é json"), emptyNotes());
   assert.deepEqual(parseStoredNotes(JSON.stringify({ version: 2, notes: {} })), emptyNotes());
   assert.deepEqual(parseStoredNotes(JSON.stringify({ version: 1, notes: { broken: 42 } })), emptyNotes());
 });

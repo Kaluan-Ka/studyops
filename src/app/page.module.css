@@ -40,6 +40,7 @@
 .textLink:focus-visible,
 .primaryLink:focus-visible,
 .secondaryLink:focus-visible,
+.mobileMissionDock:focus-within,
 .backLink:focus-visible,
 .readingNode:focus-visible,
 .taskLink:focus-visible,
@@ -153,13 +154,17 @@
 .hero p:last-child {
   margin-top: 18px;
   max-width: 650px;
-  color: #b7c9c7;
+  color: #d0dfdc;
   font-size: 18px;
   line-height: 1.55;
 }
 
 .hero .eyebrow {
   margin-top: 0;
+}
+
+.mobileMissionDock {
+  display: none;
 }
 
 .orbitalMap {
@@ -263,14 +268,14 @@
 
 .mapTile small {
   max-width: 96px;
-  color: rgba(8, 16, 22, 0.72);
+  color: rgba(8, 16, 22, 0.86);
   font-size: 10px;
   font-weight: 800;
   line-height: 1.3;
 }
 
 .tileStatus {
-  color: rgba(8, 16, 22, 0.74);
+  color: rgba(8, 16, 22, 0.88);
   font-size: 9px;
   font-weight: 950;
   letter-spacing: 0.06em;
@@ -285,22 +290,22 @@
 }
 
 .mapTileAvailable {
-  background: linear-gradient(145deg, #ffd45d, #78d68c 72%);
+  background: linear-gradient(145deg, #d8d78b, #7fc589 72%);
   box-shadow:
-    0 0 0 4px rgba(255, 212, 93, 0.12),
-    0 0 34px rgba(139, 242, 142, 0.34);
+    0 0 0 3px rgba(255, 212, 93, 0.08),
+    0 0 22px rgba(139, 242, 142, 0.18);
 }
 
 .mapTileFuture {
   background: linear-gradient(145deg, #28313e, #151c26);
-  color: #9db7ba;
+  color: #bfd1d4;
   cursor: default;
   box-shadow: inset 0 0 0 1px rgba(183, 201, 199, 0.18);
 }
 
 .mapTileFuture .tileStatus,
 .mapTileFuture small {
-  color: #75868c;
+  color: #9aadb2;
 }
 
 .mapTile1 {
@@ -372,8 +377,8 @@
 }
 
 .legendAvailable {
-  background: #8bf28e;
-  box-shadow: 0 0 16px rgba(139, 242, 142, 0.6);
+  background: #7fc589;
+  box-shadow: 0 0 14px rgba(139, 242, 142, 0.36);
 }
 
 .legendFuture {
@@ -399,41 +404,56 @@
 }
 
 .briefingPanel > p:not(.eyebrow) {
-  color: #b7c9c7;
+  color: #d0dfdc;
   line-height: 1.55;
 }
 
 .progressModule {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   padding: 14px;
-  border: 1px solid rgba(183, 201, 199, 0.18);
+  border: 1px solid rgba(255, 212, 93, 0.28);
   background: rgba(16, 23, 37, 0.78);
 }
 
 .progressModule strong {
-  color: #edf6f1;
-  font-size: 13px;
+  color: #ffd45d;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.progressModule p {
+  color: #d0dfdc;
+  font-size: 14px;
   line-height: 1.4;
 }
 
-.progressTrack {
-  overflow: hidden;
-  height: 12px;
-  border: 1px solid rgba(183, 201, 199, 0.26);
-  background: #071016;
+.progressInventory {
+  display: grid;
+  gap: 8px;
+  margin: 2px 0 0;
 }
 
-.progressTrack div {
-  width: 100%;
-  height: 100%;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(139, 242, 142, 0.95) 0 18px,
-      transparent 18px 28px
-    ),
-    linear-gradient(90deg, rgba(139, 242, 142, 0.28), rgba(255, 212, 93, 0.2));
+.progressInventory div {
+  padding: 10px;
+  border: 1px solid rgba(183, 201, 199, 0.2);
+  background: rgba(7, 16, 22, 0.62);
+}
+
+.progressInventory dt {
+  color: #69d8ff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.progressInventory dd {
+  margin-top: 5px;
+  color: #edf6f1;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
 }
 
 .briefingCard {
@@ -628,7 +648,7 @@
 
 .primaryLink {
   display: inline-flex;
-  min-height: 40px;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   padding: 9px 13px;
@@ -648,7 +668,7 @@
 
 .secondaryLink {
   display: inline-flex;
-  min-height: 40px;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   padding: 9px 13px;
@@ -1133,6 +1153,20 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .mapTile,
+  .fundamento,
+  .primaryLink,
+  .secondaryLink {
+    transition: none;
+  }
+
+  .mapTileCurrent:hover,
+  .mapTileAvailable:hover,
+  .fundamento:focus-within,
+  .fundamento:hover {
+    transform: none;
+  }
+
   .readingNode {
     transition: none;
   }
@@ -1296,6 +1330,118 @@
   line-height: 1.45;
 }
 
+.missionBriefing,
+.missionBriefingCompact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+  gap: 18px;
+  margin-top: 24px;
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid rgba(255, 212, 93, 0.34);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 212, 93, 0.12), transparent 38%),
+    rgba(7, 16, 22, 0.78);
+  color: #edf6f1;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.22);
+}
+
+.missionBriefingCompact {
+  grid-template-columns: 1fr;
+  margin-top: 22px;
+  padding: 16px;
+  border-color: rgba(183, 201, 199, 0.2);
+  background: rgba(16, 23, 37, 0.72);
+  box-shadow: none;
+}
+
+.missionBriefingBody h2 {
+  max-width: 760px;
+  margin-top: 8px;
+  color: #f8f1d0;
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.08;
+}
+
+.missionBriefingCompact .missionBriefingBody h2 {
+  font-size: 22px;
+}
+
+.missionBriefingBody > p:not(.sectionKicker) {
+  max-width: 720px;
+  margin-top: 12px;
+  color: #d0dfdc;
+  line-height: 1.55;
+}
+
+.missionBriefingMeta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 0;
+}
+
+.missionBriefingCompact .missionBriefingMeta {
+  grid-template-columns: 1fr;
+  margin-top: 12px;
+}
+
+.missionBriefingMeta div {
+  padding: 12px;
+  border: 1px solid rgba(183, 201, 199, 0.18);
+  background: rgba(7, 16, 22, 0.46);
+}
+
+.missionBriefingMeta dt,
+.missionBriefingAction span {
+  color: #69d8ff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.missionBriefingMeta dd {
+  margin: 6px 0 0;
+  color: #edf6f1;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.missionBriefingAction {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(139, 242, 142, 0.28);
+  background: rgba(16, 23, 37, 0.82);
+}
+
+.missionBriefingAction ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.missionBriefingAction li {
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 212, 93, 0.22);
+  background: rgba(255, 212, 93, 0.08);
+  color: #f8f1d0;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.missionBriefingLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .missionSectionDeck {
   margin-top: 34px;
 }
@@ -1373,6 +1519,32 @@
 
   .hero h1 {
     font-size: 40px;
+  }
+
+  .mobileMissionDock {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 14px;
+    border: 1px solid rgba(139, 242, 142, 0.38);
+    background: rgba(7, 16, 22, 0.86);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.22);
+  }
+
+  .mobileMissionDock span {
+    color: #8bf28e;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .mobileMissionDock strong {
+    color: #edf6f1;
+    font-size: 18px;
+    line-height: 1.2;
   }
 
   .sectionHeader {
@@ -1463,7 +1635,12 @@
   }
 
   .regionHero,
-  .readingMeta {
+  .readingMeta,
+  .missionBriefing {
+    grid-template-columns: 1fr;
+  }
+
+  .missionBriefingMeta {
     grid-template-columns: 1fr;
   }
 

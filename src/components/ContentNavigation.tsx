@@ -18,7 +18,7 @@ export function ContentNavigation({ previous, next }: ContentNavigationProps) {
   }
 
   return (
-    <nav className={styles.contentNavigation} aria-label="Navegacao entre sessoes">
+    <nav className={styles.contentNavigation} aria-label="Navegação entre sessões">
       {previous ? (
         <Link href={previous.href} className={styles.navigationLink}>
           <span>Anterior</span>
@@ -29,7 +29,7 @@ export function ContentNavigation({ previous, next }: ContentNavigationProps) {
       )}
       {next ? (
         <Link href={next.href} className={`${styles.navigationLink} ${styles.navigationNext}`}>
-          <span>Proxima</span>
+          <span>Próxima</span>
           <strong>{next.title}</strong>
         </Link>
       ) : (

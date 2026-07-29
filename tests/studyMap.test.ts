@@ -36,6 +36,42 @@ test("buildStudyMap cria tiles ativos, briefing e territorios futuros", () => {
   assert.equal(map.tiles[1].state, "available");
   assert.deepEqual(
     map.futureRegions.map((region) => region.title),
-    ["Dados, busca e memoria", "Modelos e IA aplicada", "Infra e portfolio"],
+    ["Dados, busca e memória", "Modelos e IA aplicada", "Infra e portfólio"],
   );
+});
+
+test("buildStudyMap separa progresso real do inventario de conteudo", () => {
+  const fundamentos = [
+    fundament({
+      title: "CLI para ferramentas",
+      slug: "cli-para-ferramentas",
+      order: 1,
+      steps: [
+        {
+          id: "STEP-1",
+          title: "Contrato",
+          slug: "contrato",
+          order: 1,
+          expectedEvidence: ["README", "Teste automatizado"],
+          tasks: [],
+        },
+        {
+          id: "STEP-2",
+          title: "Execucao",
+          slug: "execucao",
+          order: 2,
+          expectedEvidence: ["README"],
+          tasks: [],
+        },
+      ],
+    }),
+  ];
+
+  const map = buildStudyMap(fundamentos);
+
+  assert.equal(map.realProgress.state, "waiting_for_supabase");
+  assert.equal(map.realProgress.label, "Progresso real");
+  assert.match(map.realProgress.description, /Supabase/);
+  assert.equal(map.realProgress.inventoryLabel, "2 evidências esperadas mapeadas");
+  assert.equal("percentage" in map.realProgress, false);
 });

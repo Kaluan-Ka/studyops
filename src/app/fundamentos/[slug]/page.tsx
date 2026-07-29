@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { MissionBriefing } from "@/components/MissionBriefing";
 import { getExternalSources, getFundamentBySlug, getFundamentos } from "@/lib/content";
+import { buildFundamentBriefing, formatEvidenceLabel } from "@/lib/missionBriefing";
 
 import styles from "../../page.module.css";
 
@@ -22,6 +24,7 @@ export default async function FundamentPage({ params }: PageProps) {
   }
 
   const sources = getExternalSources(fundament.sections);
+  const briefing = buildFundamentBriefing(fundament);
 
   return (
     <div className={styles.page}>
@@ -36,14 +39,14 @@ export default async function FundamentPage({ params }: PageProps) {
             <span>{fundament.order.toString().padStart(2, "0")}</span>
           </div>
           <div className={styles.regionBrief}>
-            <p className={styles.eyebrow}>Regiao aberta · Fundamento {fundament.order}</p>
+            <p className={styles.eyebrow}>Região aberta · Fundamento {fundament.order}</p>
             <h1 id="fundamento-titulo">{fundament.title}</h1>
             <p className={styles.detailLead}>{fundament.summary}</p>
             {fundament.intro ? <p className={styles.intro}>{fundament.intro}</p> : null}
           </div>
           <dl className={styles.regionStats} aria-label="Telemetria do fundamento">
             <div>
-              <dt>Sessoes</dt>
+              <dt>Sessões</dt>
               <dd>{fundament.sections.length}</dd>
             </div>
             <div>
@@ -51,7 +54,7 @@ export default async function FundamentPage({ params }: PageProps) {
               <dd>{fundament.steps.length}</dd>
             </div>
             <div>
-              <dt>Missoes</dt>
+              <dt>Missões</dt>
               <dd>{fundament.tasks.length}</dd>
             </div>
             <div>
@@ -61,51 +64,13 @@ export default async function FundamentPage({ params }: PageProps) {
           </dl>
         </section>
 
-        {sources.length ? (
-          <section className={styles.sourceDock} aria-labelledby="fontes-titulo">
-            <div className={styles.sectionHeader}>
-              <div>
-                <p className={styles.sectionKicker}>Referencias usadas</p>
-                <h2 id="fontes-titulo">Fontes do fundamento</h2>
-              </div>
-              <span>{sources.length} links</span>
-            </div>
-            <ul className={styles.sourcesList}>
-              {sources.map((source) => (
-                <li key={source.url}>
-                  <a href={source.url} target="_blank" rel="noreferrer">
-                    {source.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ) : null}
-
-        <section className={styles.readingRoute} aria-labelledby="sessoes-titulo">
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionKicker}>Trilha de leitura</p>
-              <h2 id="sessoes-titulo">Sessoes da regiao</h2>
-            </div>
-            <span>{fundament.sections.length} blocos</span>
-          </div>
-          <div className={styles.sessionGrid}>
-            {fundament.sections.map((section) => (
-              <Link key={section.slug} href={`/fundamentos/${fundament.slug}/sessoes/${section.slug}`} className={styles.readingNode}>
-                <span>Sessao {section.order.toString().padStart(2, "0")}</span>
-                <strong>{section.title}</strong>
-                <small>Briefing de leitura</small>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <MissionBriefing briefing={briefing} />
 
         <section className={styles.routeDeck} aria-labelledby="rotas-titulo">
           <div className={styles.sectionHeader}>
             <div>
-              <p className={styles.sectionKicker}>Rotas praticas</p>
-              <h2 id="rotas-titulo">Etapas e missoes</h2>
+              <p className={styles.sectionKicker}>Rotas práticas</p>
+              <h2 id="rotas-titulo">Etapas e missões</h2>
             </div>
             <span>{fundament.tasks.length} missoes</span>
           </div>
@@ -123,7 +88,7 @@ export default async function FundamentPage({ params }: PageProps) {
                   </Link>
                 </div>
                 <p className={styles.evidenceHint}>
-                  Evidencias: {step.expectedEvidence.length ? step.expectedEvidence.join(", ") : "a definir"}
+                  Evidências: {step.expectedEvidence.length ? step.expectedEvidence.map(formatEvidenceLabel).join(", ") : "a definir"}
                 </p>
                 <div className={styles.missionLinks}>
                   {step.tasks.map((task) => (
@@ -137,6 +102,46 @@ export default async function FundamentPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        <section className={styles.readingRoute} aria-labelledby="sessoes-titulo">
+          <div className={styles.sectionHeader}>
+            <div>
+              <p className={styles.sectionKicker}>Apoio de leitura</p>
+              <h2 id="sessoes-titulo">Sessões da região</h2>
+            </div>
+            <span>{fundament.sections.length} blocos</span>
+          </div>
+          <div className={styles.sessionGrid}>
+            {fundament.sections.map((section) => (
+              <Link key={section.slug} href={`/fundamentos/${fundament.slug}/sessoes/${section.slug}`} className={styles.readingNode}>
+                <span>Sessão {section.order.toString().padStart(2, "0")}</span>
+                <strong>{section.title}</strong>
+                <small>Briefing de leitura</small>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {sources.length ? (
+          <section className={styles.sourceDock} aria-labelledby="fontes-titulo">
+            <div className={styles.sectionHeader}>
+              <div>
+                <p className={styles.sectionKicker}>Referências usadas</p>
+                <h2 id="fontes-titulo">Fontes do fundamento</h2>
+              </div>
+              <span>{sources.length} links</span>
+            </div>
+            <ul className={styles.sourcesList}>
+              {sources.map((source) => (
+                <li key={source.url}>
+                  <a href={source.url} target="_blank" rel="noreferrer">
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
       </main>
     </div>
   );

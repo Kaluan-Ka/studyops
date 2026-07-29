@@ -174,7 +174,7 @@ export function getTaskBySlug(
   );
 
   if (matches.length !== 1) {
-    throw new Error(`Tarefa nao encontrada ou ambigua: ${taskSlug}`);
+    throw new Error(`Tarefa não encontrada ou ambígua: ${taskSlug}`);
   }
 
   return matches[0];
@@ -247,7 +247,7 @@ function readTasks(fundamentSlug: string, fundamentId: string): Task[] {
   const directory = path.join(contentRoot, "tasks", fundamentSlug);
 
   if (!fs.existsSync(directory)) {
-    throw new Error(`Diretorio de tarefas nao encontrado: ${directory}`);
+    throw new Error(`Diretório de tarefas não encontrado: ${directory}`);
   }
 
   return fs
@@ -287,7 +287,7 @@ function requiredString(
   const value = data[key];
 
   if (typeof value !== "string" || !value.trim()) {
-    throw new Error(`Campo ${key} invalido em ${filePath}`);
+    throw new Error(`Campo ${key} inválido em ${filePath}`);
   }
 
   return value;
@@ -301,7 +301,7 @@ function requiredNumber(
   const value = data[key];
 
   if (typeof value !== "number") {
-    throw new Error(`Campo ${key} invalido em ${filePath}`);
+    throw new Error(`Campo ${key} inválido em ${filePath}`);
   }
 
   return value;
@@ -315,7 +315,7 @@ function requiredArray(
   const value = data[key];
 
   if (!Array.isArray(value)) {
-    throw new Error(`Campo ${key} invalido em ${filePath}`);
+    throw new Error(`Campo ${key} inválido em ${filePath}`);
   }
 
   return value;
@@ -323,7 +323,7 @@ function requiredArray(
 
 function asRecord(value: unknown, context: string): Record<string, unknown> {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
-    throw new Error(`Objeto invalido em ${context}`);
+    throw new Error(`Objeto inválido em ${context}`);
   }
 
   return value as Record<string, unknown>;

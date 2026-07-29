@@ -172,6 +172,7 @@ Hexágonos representam território e fundamento. Cards usam retângulos de canto
 - **Color:** fundos escuros translúcidos ou tonais.
 - **Content:** briefing, progresso, links de ação e contexto da região ativa.
 - **Data Rule:** barras, contadores e sinais devem representar conteúdo existente ou estado explicitamente derivado. Não usar percentuais aparentes quando não houver progresso persistido.
+- **Progress Bar Rule:** barras de progresso ficam reservadas para progresso real persistido no Supabase. Antes disso, use contadores, inventário de conteúdo, checklist ou sinais não-percentuais.
 
 ### Buttons
 

@@ -36,6 +36,13 @@ export type StudyMapViewModel = {
     sessoes: number;
     evidencias: number;
   };
+  realProgress: {
+    state: "waiting_for_supabase";
+    label: string;
+    statusLabel: string;
+    description: string;
+    inventoryLabel: string;
+  };
 };
 
 export function buildStudyMap(fundamentos: Fundament[]): StudyMapViewModel {
@@ -67,26 +74,35 @@ export function buildStudyMap(fundamentos: Fundament[]): StudyMapViewModel {
       evidenceCount: evidence.size,
     } satisfies StudyMapTile;
   });
+  const stats = {
+    fundamentos: fundamentos.length,
+    tarefas: fundamentos.reduce((total, fundament) => total + fundament.tasks.length, 0),
+    sessoes: tiles.reduce((total, tile) => total + tile.sessionCount, 0),
+    evidencias: tiles.reduce((total, tile) => total + tile.evidenceCount, 0),
+  };
 
   return {
     activeBlock: {
       title: "Bloco 1: Ferramentas para empacotar IA",
-      label: "Regiao ativa",
+      label: "Região ativa",
       summary:
-        "Autonomia para criar CLIs, APIs, processos, pipelines e testes que empacotam projetos de IA em entregas reproduziveis.",
+        "Autonomia para criar CLIs, APIs, processos, pipelines e testes que empacotam projetos de IA em entregas reproduzíveis.",
     },
     currentTile: tiles[0],
     tiles,
     futureRegions: [
-      { title: "Dados, busca e memoria", label: "Territorio futuro" },
-      { title: "Modelos e IA aplicada", label: "Territorio futuro" },
-      { title: "Infra e portfolio", label: "Territorio futuro" },
+      { title: "Dados, busca e memória", label: "Território futuro" },
+      { title: "Modelos e IA aplicada", label: "Território futuro" },
+      { title: "Infra e portfólio", label: "Território futuro" },
     ],
-    stats: {
-      fundamentos: fundamentos.length,
-      tarefas: fundamentos.reduce((total, fundament) => total + fundament.tasks.length, 0),
-      sessoes: tiles.reduce((total, tile) => total + tile.sessionCount, 0),
-      evidencias: tiles.reduce((total, tile) => total + tile.evidenceCount, 0),
+    stats,
+    realProgress: {
+      state: "waiting_for_supabase",
+      label: "Progresso real",
+      statusLabel: "Aguardando Supabase",
+      description:
+        "A barra volta quando o Supabase persistir evidências, tarefas e ciclos concluídos.",
+      inventoryLabel: `${stats.evidencias} evidências esperadas mapeadas`,
     },
   };
 }

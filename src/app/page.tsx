@@ -24,10 +24,10 @@ export default function Home() {
         <Link href="/" className={styles.brand}>
           StudyOps
         </Link>
-        <nav aria-label="Navegacao principal">
+        <nav aria-label="Navegação principal">
           <a href="#mapa">Mapa</a>
-          <a href="#missoes">Missoes</a>
-          <a href="#evidencias">Evidencias</a>
+          <a href="#missoes">Missões</a>
+          <a href="#evidencias">Evidências</a>
         </nav>
       </header>
 
@@ -38,10 +38,22 @@ export default function Home() {
               <p className={styles.eyebrow}>Atlas operacional de Engenharia de IA</p>
               <h1 id="titulo">Comande sua trilha pelo mapa de fundamentos.</h1>
               <p>
-                Cada regiao conecta referencia, fundamento, implementacao, projeto, evidencia e
-                proximo passo. O Bloco 1 esta ativo; o resto do mundo aparece no radar.
+                Cada região conecta referência, fundamento, implementação, projeto, evidência e
+                próximo passo. O Bloco 1 está ativo; o resto do mundo aparece no radar.
               </p>
             </div>
+
+            {currentTile ? (
+              <div className={styles.mobileMissionDock} aria-label="Próxima missão">
+                <span>Missão atual</span>
+                <strong>{currentTile.title}</strong>
+                {currentTile.sessionHref ? (
+                  <Link href={currentTile.sessionHref} className={styles.primaryLink}>
+                    Iniciar sessão
+                  </Link>
+                ) : null}
+              </div>
+            ) : null}
 
             <div className={styles.orbitalMap} aria-label="Mapa de fundamentos do StudyOps">
               <div className={styles.orbitOuter} aria-hidden="true" />
@@ -50,13 +62,17 @@ export default function Home() {
               <ul className={styles.tileList}>
                 {studyMap.tiles.map((tile, index) => (
                   <li key={tile.slug}>
-                    <Link href={tile.href} className={tileClassName(tile, index)}>
+                    <Link
+                      href={tile.href}
+                      className={tileClassName(tile, index)}
+                      aria-current={tile.state === "current" ? "page" : undefined}
+                    >
                       <span className={styles.tileStatus}>
                         {tile.state === "current" ? "Em foco" : "A estudar"}
                       </span>
                       <strong>{tile.title}</strong>
                       <small>
-                        {tile.taskCount} tarefas · {tile.sessionCount} sessoes
+                        {tile.taskCount} tarefas · {tile.sessionCount} sessões
                       </small>
                     </Link>
                   </li>
@@ -87,28 +103,36 @@ export default function Home() {
             <div className={styles.mapLegend} aria-label="Legenda do mapa">
               <span><i className={styles.legendCurrent} /> Em foco</span>
               <span><i className={styles.legendAvailable} /> A estudar</span>
-              <span><i className={styles.legendFuture} /> Territorio futuro</span>
+              <span><i className={styles.legendFuture} /> Território futuro</span>
             </div>
           </div>
 
           <aside className={styles.briefingPanel} aria-labelledby="briefing-titulo">
-            <p className={styles.eyebrow}>Briefing da operacao</p>
+            <p className={styles.eyebrow}>Briefing da operação</p>
             <h2 id="briefing-titulo">{studyMap.activeBlock.title}</h2>
             <p>{studyMap.activeBlock.summary}</p>
 
             <div className={styles.progressModule}>
-              <span>Regiao ativa</span>
-              <div className={styles.progressTrack} aria-hidden="true">
-                <div />
-              </div>
-              <strong>
-                {studyMap.stats.fundamentos} fundamentos · {studyMap.stats.tarefas} missoes
-              </strong>
+              <span>{studyMap.realProgress.label}</span>
+              <strong>{studyMap.realProgress.statusLabel}</strong>
+              <p>{studyMap.realProgress.description}</p>
+              <dl className={styles.progressInventory}>
+                <div>
+                  <dt>Inventário</dt>
+                  <dd>{studyMap.realProgress.inventoryLabel}</dd>
+                </div>
+                <div>
+                  <dt>Bloco ativo</dt>
+                  <dd>
+                    {studyMap.stats.fundamentos} fundamentos · {studyMap.stats.tarefas} missões
+                  </dd>
+                </div>
+              </dl>
             </div>
 
             {currentTile ? (
               <article className={styles.briefingCard}>
-                <span>Carta de missao atual</span>
+                <span>Carta de missão atual</span>
                 <h3>{currentTile.title}</h3>
                 <p>{currentTile.summary}</p>
                 <dl>
@@ -117,11 +141,11 @@ export default function Home() {
                     <dd>{currentTile.taskCount}</dd>
                   </div>
                   <div>
-                    <dt>Sessoes</dt>
+                    <dt>Sessões</dt>
                     <dd>{currentTile.sessionCount}</dd>
                   </div>
                   <div>
-                    <dt>Evidencias</dt>
+                    <dt>Evidências</dt>
                     <dd>{currentTile.evidenceCount}</dd>
                   </div>
                 </dl>
@@ -131,7 +155,7 @@ export default function Home() {
             <div className={styles.briefingActions}>
               {currentTile?.sessionHref ? (
                 <Link href={currentTile.sessionHref} className={styles.primaryLink}>
-                  Iniciar sessao
+                  Iniciar sessão
                 </Link>
               ) : null}
               {currentTile ? (
@@ -147,7 +171,7 @@ export default function Home() {
           <div className={styles.sectionHeader}>
             <div>
               <p className={styles.sectionKicker}>Deck do Bloco 1</p>
-              <h2 id="missoes-titulo">Cartas de missao</h2>
+              <h2 id="missoes-titulo">Cartas de missão</h2>
             </div>
             <span>Markdown versionado</span>
           </div>
@@ -167,15 +191,15 @@ export default function Home() {
                 </div>
                 <div className={styles.cardFooter}>
                   <span>
-                    {tile.taskCount} tarefas · {tile.sessionCount} sessoes ·{" "}
-                    {tile.evidenceCount} evidencias
+                    {tile.taskCount} tarefas · {tile.sessionCount} sessões ·{" "}
+                    {tile.evidenceCount} evidências
                   </span>
                   <Link href={tile.href} className={styles.textLink}>
                     Ver fundamento
                   </Link>
                   {tile.sessionHref ? (
                     <Link href={tile.sessionHref} className={styles.primaryLink}>
-                      Comecar sessao
+                      Iniciar sessão
                     </Link>
                   ) : null}
                 </div>
@@ -188,15 +212,15 @@ export default function Home() {
           <div>
             <span>Fundamentos no mapa</span>
             <strong>{studyMap.stats.fundamentos}</strong>
-            <p>Territorios ativos no primeiro bloco da trilha.</p>
+            <p>Territórios ativos no primeiro bloco da trilha.</p>
           </div>
           <div>
-            <span>Missoes praticas</span>
+            <span>Missões práticas</span>
             <strong>{studyMap.stats.tarefas}</strong>
-            <p>Tarefas pequenas ligadas a implementacao e portfolio.</p>
+            <p>Tarefas pequenas ligadas a implementação e portfólio.</p>
           </div>
           <div>
-            <span>Evidencias esperadas</span>
+            <span>Evidências esperadas</span>
             <strong>{studyMap.stats.evidencias}</strong>
             <p>Tipos de artefato que acendem progresso real no StudyOps.</p>
           </div>
