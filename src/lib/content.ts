@@ -28,6 +28,7 @@ export type Task = {
   slug: string;
   status: string;
   order: number;
+  goal: string;
   expectedEvidence: string[];
   intro: string;
   sections: ContentSection[];
@@ -272,6 +273,7 @@ function readTasks(fundamentSlug: string, fundamentId: string): Task[] {
         slug: requiredString(data, "slug", filePath),
         status: requiredString(data, "status", filePath),
         order: requiredNumber(data, "order", filePath),
+        goal: requiredString(data, "goal", filePath),
         expectedEvidence: stringArray(data.expected_evidence),
         intro: parsed.intro,
         sections: parsed.sections,

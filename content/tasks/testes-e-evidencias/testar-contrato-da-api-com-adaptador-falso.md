@@ -6,6 +6,7 @@ title: Testar contrato da API com adaptador falso
 slug: testar-contrato-da-api-com-adaptador-falso
 status: a_fazer
 order: 58
+goal: Verificar o contrato da API isolando armazenamento para testar comportamento sem depender de banco real.
 expected_evidence:
   - teste_automatizado
 ---

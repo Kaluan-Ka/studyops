@@ -6,6 +6,7 @@ title: Mapear comando processo e status
 slug: mapear-comando-processo-e-status
 status: a_fazer
 order: 43
+goal: Entender como comando, processo e status de saida formam a base operacional de automacoes locais.
 expected_evidence:
   - nota_markdown
 ---

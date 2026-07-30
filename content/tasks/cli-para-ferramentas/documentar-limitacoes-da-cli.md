@@ -6,6 +6,7 @@ title: Documentar limitacoes da CLI
 slug: documentar-limitacoes-da-cli
 status: a_fazer
 order: 36
+goal: Explicitar o que a CLI faz, o que ainda nao faz e qual evolucao tecnica vem depois.
 expected_evidence:
   - nota_markdown
   - readme_atualizado

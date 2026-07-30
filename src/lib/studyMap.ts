@@ -21,6 +21,18 @@ export type FutureRegion = {
   label: string;
 };
 
+export type StudyNarrativeGuide = {
+  speaker: string;
+  callSign: string;
+  title: string;
+  message: string;
+  focusLabel: string;
+  focusValue: string;
+  evidenceLabel: string;
+  nextStepLabel: string;
+  href: string;
+};
+
 export type StudyMapViewModel = {
   activeBlock: {
     title: string;
@@ -30,6 +42,7 @@ export type StudyMapViewModel = {
   currentTile?: StudyMapTile;
   tiles: StudyMapTile[];
   futureRegions: FutureRegion[];
+  narrativeGuide: StudyNarrativeGuide;
   stats: {
     fundamentos: number;
     tarefas: number;
@@ -95,6 +108,7 @@ export function buildStudyMap(fundamentos: Fundament[]): StudyMapViewModel {
       { title: "Modelos e IA aplicada", label: "Território futuro" },
       { title: "Infra e portfólio", label: "Território futuro" },
     ],
+    narrativeGuide: buildNarrativeGuide(tiles[0]),
     stats,
     realProgress: {
       state: "waiting_for_supabase",
@@ -105,4 +119,40 @@ export function buildStudyMap(fundamentos: Fundament[]): StudyMapViewModel {
       inventoryLabel: `${stats.evidencias} evidências esperadas mapeadas`,
     },
   };
+}
+
+function buildNarrativeGuide(currentTile: StudyMapTile | undefined): StudyNarrativeGuide {
+  if (!currentTile) {
+    return {
+      speaker: "Navegadora de campo",
+      callSign: "N-01",
+      title: "Foco narrado: mapa vazio",
+      message:
+        "Cadastre o primeiro fundamento para transformar o mapa em uma rota de estudo com missão e evidência.",
+      focusLabel: "Fundamento em foco",
+      focusValue: "Nenhum fundamento cadastrado",
+      evidenceLabel: "0 evidências esperadas",
+      nextStepLabel: "Cadastrar fundamento",
+      href: "/",
+    };
+  }
+
+  const firstSession = currentTile.sessionLabel ?? "a primeira sessão";
+  const nextStepLabel = currentTile.sessionHref ? "Iniciar primeira sessão" : "Revisar fundamento";
+
+  return {
+    speaker: "Navegadora de campo",
+    callSign: "N-01",
+    title: `Foco narrado: ${currentTile.title}`,
+    message: `Comece por ${firstSession}. Use a leitura para entender o fundamento, abrir uma missão pequena e registrar evidência antes de avançar pelo mapa.`,
+    focusLabel: "Fundamento em foco",
+    focusValue: currentTile.title,
+    evidenceLabel: `${currentTile.evidenceCount} ${pluralizeEvidence(currentTile.evidenceCount)} esperadas`,
+    nextStepLabel,
+    href: currentTile.sessionHref ?? currentTile.href,
+  };
+}
+
+function pluralizeEvidence(count: number): string {
+  return count === 1 ? "evidência" : "evidências";
 }

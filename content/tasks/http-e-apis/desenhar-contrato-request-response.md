@@ -6,6 +6,7 @@ title: Desenhar contrato request response
 slug: desenhar-contrato-request-response
 status: a_fazer
 order: 37
+goal: Entender uma API como contrato entre cliente e servidor antes de escrever o endpoint.
 expected_evidence:
   - nota_markdown
 ---

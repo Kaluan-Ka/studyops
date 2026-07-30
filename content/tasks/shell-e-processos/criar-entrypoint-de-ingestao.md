@@ -6,6 +6,7 @@ title: Criar entrypoint de ingestao
 slug: criar-entrypoint-de-ingestao
 status: a_fazer
 order: 47
+goal: Criar uma porta de entrada reproduzivel para iniciar ingestao local por linha de comando.
 expected_evidence:
   - exemplo_reproduzivel
 ---

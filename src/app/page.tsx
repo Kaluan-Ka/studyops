@@ -112,6 +112,30 @@ export default function Home() {
             <h2 id="briefing-titulo">{studyMap.activeBlock.title}</h2>
             <p>{studyMap.activeBlock.summary}</p>
 
+            <section className={styles.narrativeGuide} aria-labelledby="guia-narrativo-titulo">
+              <div className={styles.guideSignal} aria-hidden="true">
+                <span>{studyMap.narrativeGuide.callSign}</span>
+              </div>
+              <div className={styles.guideBody}>
+                <p className={styles.guideSpeaker}>{studyMap.narrativeGuide.speaker}</p>
+                <h3 id="guia-narrativo-titulo">{studyMap.narrativeGuide.title}</h3>
+                <p>{studyMap.narrativeGuide.message}</p>
+                <dl className={styles.guideTelemetry}>
+                  <div>
+                    <dt>{studyMap.narrativeGuide.focusLabel}</dt>
+                    <dd>{studyMap.narrativeGuide.focusValue}</dd>
+                  </div>
+                  <div>
+                    <dt>Evidência</dt>
+                    <dd>{studyMap.narrativeGuide.evidenceLabel}</dd>
+                  </div>
+                </dl>
+                <Link href={studyMap.narrativeGuide.href} className={styles.guideLink}>
+                  {studyMap.narrativeGuide.nextStepLabel}
+                </Link>
+              </div>
+            </section>
+
             <div className={styles.progressModule}>
               <span>{studyMap.realProgress.label}</span>
               <strong>{studyMap.realProgress.statusLabel}</strong>

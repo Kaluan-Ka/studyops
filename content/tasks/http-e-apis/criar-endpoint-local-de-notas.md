@@ -6,6 +6,7 @@ title: Criar endpoint local de notas
 slug: criar-endpoint-local-de-notas
 status: a_fazer
 order: 39
+goal: Expor notas locais por HTTP com uma resposta simples, previsivel e testavel.
 expected_evidence:
   - teste_automatizado
   - exemplo_reproduzivel

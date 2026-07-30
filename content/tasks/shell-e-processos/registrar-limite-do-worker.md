@@ -6,6 +6,7 @@ title: Registrar limite do worker
 slug: registrar-limite-do-worker
 status: a_fazer
 order: 48
+goal: Documentar limites de worker para evitar prometer paralelismo, fila ou robustez que ainda nao existem.
 expected_evidence:
   - nota_markdown
 ---

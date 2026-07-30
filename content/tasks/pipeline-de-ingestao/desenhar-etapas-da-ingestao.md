@@ -6,6 +6,7 @@ title: Desenhar etapas da ingestao
 slug: desenhar-etapas-da-ingestao
 status: a_fazer
 order: 49
+goal: Visualizar a ingestao como etapas explicitas antes de implementar processamento de documentos.
 expected_evidence:
   - nota_markdown
 ---

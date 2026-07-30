@@ -6,6 +6,7 @@ title: Implementar CLI de leitura local
 slug: implementar-cli-de-leitura-local
 status: a_fazer
 order: 33
+goal: Construir o menor comando que le um arquivo local e transforma entrada real em saida verificavel.
 expected_evidence:
   - teste_automatizado
   - exemplo_reproduzivel

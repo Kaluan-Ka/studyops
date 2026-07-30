@@ -6,6 +6,7 @@ title: Comparar metodos HTTP do exercicio
 slug: comparar-metodos-http-do-exercicio
 status: a_fazer
 order: 38
+goal: Escolher metodos HTTP pela intencao da operacao, nao por habito ou conveniencia.
 expected_evidence:
   - nota_markdown
 ---

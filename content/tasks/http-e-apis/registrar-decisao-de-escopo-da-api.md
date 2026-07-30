@@ -6,6 +6,7 @@ title: Registrar decisao de escopo da API
 slug: registrar-decisao-de-escopo-da-api
 status: a_fazer
 order: 42
+goal: Registrar os limites do contrato da API para manter o MVP pequeno, explicavel e evolutivo.
 expected_evidence:
   - nota_markdown
 ---

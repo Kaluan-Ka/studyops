@@ -6,6 +6,7 @@ title: Testar resposta de erro da API
 slug: testar-resposta-de-erro-da-api
 status: a_fazer
 order: 40
+goal: Garantir que erros de API tenham status, mensagem e recuperacao claros para quem consome o endpoint.
 expected_evidence:
   - teste_automatizado
 ---

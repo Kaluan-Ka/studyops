@@ -6,6 +6,7 @@ title: Selecionar guia build your own de CLI
 slug: selecionar-guia-build-your-own-cli
 status: a_fazer
 order: 32
+goal: Escolher uma referencia build your own pequena o bastante para virar pratica, nao uma lista infinita de leitura.
 expected_evidence:
   - nota_markdown
   - link_analisado

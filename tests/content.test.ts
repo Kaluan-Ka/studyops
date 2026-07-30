@@ -66,6 +66,7 @@ test("associa tarefa a fundamento e etapa pelo frontmatter", () => {
 
   assert.equal(task.fundamentId, "FUN-000006");
   assert.equal(task.stepId, "STEP-000016");
+  assert.match(task.goal, /contrato observavel/i);
   assert.ok(task.sections.length > 0);
 });
 

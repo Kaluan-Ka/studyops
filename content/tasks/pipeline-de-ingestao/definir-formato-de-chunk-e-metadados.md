@@ -6,6 +6,7 @@ title: Definir formato de chunk e metadados
 slug: definir-formato-de-chunk-e-metadados
 status: a_fazer
 order: 50
+goal: Definir chunk e metadados como contrato minimo para preservar fonte, posicao e reutilizacao futura.
 expected_evidence:
   - nota_markdown
   - exemplo_reproduzivel

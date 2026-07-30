@@ -77,6 +77,8 @@ StudyOps deve parecer uma mesa de operações observando um mundo de fundamentos
 
 A identidade rejeita o MVP genérico de cards editoriais em fundo claro. Também rejeita gamificação decorativa: brilho, território, carta e painel só entram quando representam fundamento, status, tarefa, sessão, evidência ou próximo passo.
 
+Fantasia é uma camada de explicação, não de decoração. Personagens, sessões narradas e linguagem de missão podem existir como camada 2, depois que o mundo já funciona como ferramenta de estudo. Um personagem só deve aparecer quando ajudar a explicar um fundamento, orientar uma missão, contextualizar uma evidência ou destravar o próximo passo.
+
 ### Referência canônica
 
 A home atual em `src/app/page.tsx` e `src/app/page.module.css` é a referência canônica da identidade visual do StudyOps. Novas telas devem partir dela como linguagem-base: fundo de comando escuro, mapa/território como metáfora de progresso, painéis operacionais densos, cartas claras como objetos de missão e estados visuais ligados a ação real.
@@ -117,6 +119,8 @@ A paleta mistura sala de comando escura, sinais de telemetria e cor de territór
 ### Named Rules
 
 **The Evidence Lights the Map Rule.** Cores mais vivas indicam conclusão, foco ou evidência. Conteúdo ainda não iniciado deve parecer presente, mas adormecido.
+
+**The Fantasy Serves the Study Rule.** Elementos narrativos devem carregar função pedagógica ou operacional. Se um elemento fantástico não muda o entendimento, a decisão ou a evidência produzida pelo usuário, ele deve sair ou voltar para uma evolução futura.
 
 ## Typography
 
@@ -187,7 +191,9 @@ Hexágonos representam território e fundamento. Cards usam retângulos de canto
 - Do: mostrar regiões futuras apagadas para dar escala ao StudyOps.
 - Do: conectar cor e brilho a progresso, foco e evidência.
 - Do: usar a home como referência canônica para novas superfícies visuais.
+- Do: usar personagens ou narração apenas quando eles explicarem fundamento, missão, evidência ou próximo passo.
 - Don't: transformar estudo em pontuação vazia, ranking artificial ou conquistas sem evidência.
+- Don't: adicionar fantasia como mascote, ornamento ou ruído visual antes de o fluxo de estudo estar útil.
 - Don't: usar paleta monocromática verde ou visual SaaS genérico.
 - Don't: esconder o próximo passo em decoração.
 - Don't: copiar o mapa orbital para telas onde ele não ajuda a tarefa principal.

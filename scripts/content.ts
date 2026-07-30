@@ -212,6 +212,7 @@ function createTask(registry: Registry, args: string[], errors: string[]): void 
     `slug: ${slug}`,
     "status: a_fazer",
     `order: ${registry.issued.tasks.length}`,
+    `goal: Definir o objetivo real da missão ${title} antes de executar a entrega.`,
     "expected_evidence:",
     "  - nota_markdown",
     "---",
@@ -370,6 +371,7 @@ function readTasks(
     requireString(data, "slug", filePath, errors);
     requireString(data, "status", filePath, errors);
     requireNumber(data, "order", filePath, errors);
+    requireString(data, "goal", filePath, errors);
 
     if (!Array.isArray(data.expected_evidence)) {
       errors.push(`${relative(filePath)}: expected_evidence deve ser array.`);

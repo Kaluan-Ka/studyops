@@ -6,6 +6,7 @@ title: Definir contrato de entrada e saida
 slug: definir-contrato-de-entrada-e-saida
 status: a_fazer
 order: 31
+goal: Entender que uma CLI confiavel comeca por um contrato observavel antes da implementacao.
 expected_evidence:
   - nota_markdown
 ---

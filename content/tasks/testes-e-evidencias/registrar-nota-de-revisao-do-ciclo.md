@@ -6,6 +6,7 @@ title: Registrar nota de revisao do ciclo
 slug: registrar-nota-de-revisao-do-ciclo
 status: a_fazer
 order: 60
+goal: Fechar o ciclo de estudo registrando aprendizado, evidencia produzida e proxima aplicacao.
 expected_evidence:
   - nota_markdown
   - readme_atualizado

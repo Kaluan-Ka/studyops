@@ -52,6 +52,10 @@ export default async function TaskPage({ params }: PageProps) {
           <p className={styles.eyebrow}>Carta de missão prática</p>
           <h1 id="tarefa-titulo">{task.title}</h1>
           <p className={styles.detailLead}>{task.intro}</p>
+          <section className={styles.missionGoal} aria-labelledby="objetivo-real-titulo">
+            <span>Objetivo real da missão</span>
+            <h2 id="objetivo-real-titulo">{task.goal}</h2>
+          </section>
           <dl className={styles.missionMeta}>
             <div>
               <dt>Fundamento</dt>

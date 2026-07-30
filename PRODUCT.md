@@ -41,6 +41,7 @@ O repositorio contem conteudo real em `content/`, referencias de produto em `tri
 - A trilha deve favorecer aprender construindo, nao consumir conteudo sem aplicacao.
 - O app deve mostrar o proximo passo com clareza.
 - O mundo visual deve servir metodo e orientacao, nao gamificacao decorativa.
+- Fantasia, personagens e sessoes narradas sao camada 2: entram depois que o fluxo de estudo funciona e devem explicar fundamento, missao, evidencia ou proximo passo.
 
 ## Accessibility & Inclusion
 

@@ -6,6 +6,7 @@ title: Executar CLI em fixtures do portfolio
 slug: executar-cli-em-fixtures-do-portfolio
 status: a_fazer
 order: 35
+goal: Validar a CLI contra exemplos do portfolio para aproximar o exercicio de um fluxo real de estudo.
 expected_evidence:
   - exemplo_reproduzivel
 ---

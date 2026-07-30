@@ -6,6 +6,7 @@ title: Comparar processo principal e worker
 slug: comparar-processo-principal-e-worker
 status: a_fazer
 order: 44
+goal: Decidir quando uma operacao deve rodar no processo principal e quando merece virar worker.
 expected_evidence:
   - nota_markdown
 ---

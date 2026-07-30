@@ -34,6 +34,7 @@ const task: Task = {
   slug: "definir-contrato-da-cli",
   status: "a_fazer",
   order: 1,
+  goal: "Entender que uma CLI confiavel comeca por um contrato observavel antes da implementacao.",
   expectedEvidence: ["nota_markdown", "teste_automatizado"],
   intro: "Transforme a ideia em contrato verificavel.",
   sections,
@@ -80,6 +81,10 @@ test("buildFundamentBriefing prioriza a primeira missão da primeira rota", () =
   assert.equal(briefing.kicker, "Próxima ação da região");
   assert.equal(briefing.title, "Definir contrato da CLI");
   assert.equal(briefing.context, "Rota 1: Entender o contrato");
+  assert.equal(
+    briefing.description,
+    "Entender que uma CLI confiavel comeca por um contrato observavel antes da implementacao.",
+  );
   assert.equal(briefing.primary.href, "/fundamentos/cli-para-ferramentas/tarefas/definir-contrato-da-cli");
   assert.equal(briefing.primary.label, "Abrir missão");
   assert.deepEqual(briefing.evidence, [
@@ -93,6 +98,10 @@ test("buildStepBriefing aponta para a primeira tarefa da etapa", () => {
 
   assert.equal(briefing.title, "Definir contrato da CLI");
   assert.equal(briefing.context, "Missão 01 da rota");
+  assert.equal(
+    briefing.description,
+    "Entender que uma CLI confiavel comeca por um contrato observavel antes da implementacao.",
+  );
   assert.equal(briefing.primary.href, "/fundamentos/cli-para-ferramentas/tarefas/definir-contrato-da-cli");
 });
 
@@ -101,6 +110,10 @@ test("buildTaskBriefing aponta para a primeira sessão da tarefa", () => {
 
   assert.equal(briefing.title, "Primeira leitura");
   assert.equal(briefing.context, "Rota: Entender o contrato");
+  assert.equal(
+    briefing.description,
+    "Entender que uma CLI confiavel comeca por um contrato observavel antes da implementacao.",
+  );
   assert.equal(briefing.primary.href, "/fundamentos/cli-para-ferramentas/tarefas/definir-contrato-da-cli/sessoes/primeira-leitura");
   assert.equal(briefing.secondary?.href, "/fundamentos/cli-para-ferramentas/etapas/entender-o-contrato");
 });

@@ -6,6 +6,7 @@ title: Executar comando com status observavel
 slug: executar-comando-com-status-observavel
 status: a_fazer
 order: 45
+goal: Executar um comando real e capturar sucesso ou falha como dado verificavel.
 expected_evidence:
   - teste_automatizado
   - exemplo_reproduzivel

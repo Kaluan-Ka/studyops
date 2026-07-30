@@ -6,6 +6,7 @@ title: Implementar ingestao de TXT e Markdown
 slug: implementar-ingestao-de-txt-e-markdown
 status: a_fazer
 order: 51
+goal: Implementar a menor ingestao util para transformar TXT e Markdown em registros pesquisaveis.
 expected_evidence:
   - teste_automatizado
   - exemplo_reproduzivel

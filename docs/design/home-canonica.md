@@ -37,6 +37,8 @@ A home define a linguagem principal: fundo escuro de comando, mapa orbital/hexag
 
 Novas telas devem herdar o clima e os tokens, mas nao precisam repetir o mapa. Uma pagina de leitura pode ser mais calma; uma pagina de tarefas pode usar cartas; um dashboard pode usar briefing e paineis densos.
 
+A fantasia deve entrar com cuidado. Primeiro, o mundo precisa funcionar como ferramenta de estudo: orientar fundamento, missao, evidencia e proximo passo. Personagens, sessoes narradas e vozes de missao pertencem a uma segunda camada, usada somente quando explicar melhor o conteudo ou a acao. O personagem ideal nao decora a tela; ele traduz um fundamento, chama atencao para uma evidencia ou ajuda a destravar a proxima aplicacao.
+
 ### 3. Componentes de referencia
 
 **Mapa de fundamentos**
@@ -69,6 +71,7 @@ Use paineis escuros para contadores e contexto agregado. Contadores devem vir do
 - Em mobile, preserve o mapa ou objeto principal antes do briefing.
 - Nao introduza IA, Supabase, importacao externa ou progresso persistido apenas por necessidade visual.
 - Reserve barras de progresso para progresso real vindo do Supabase; antes disso, use somente contadores e sinais de inventario.
+- Trate personagens e narracao como camada 2: nunca devem competir com o objeto principal da tarefa.
 
 ## Criterio de compatibilidade
 
@@ -76,6 +79,7 @@ Uma nova tela esta alinhada com a home canonica quando:
 
 - o usuario entende o estado atual e o proximo passo em poucos segundos;
 - cada card, brilho, mapa ou contador representa algo real;
+- qualquer personagem ou narracao ajuda a entender fundamento, missao, evidencia ou proximo passo;
 - a tela parece parte do StudyOps mesmo sem repetir a home literalmente;
 - a interface funciona em desktop e mobile sem sobreposicao;
 - a decisao visual pode ser explicada a partir de `DESIGN.md`.

@@ -6,6 +6,7 @@ title: Conectar API ao fluxo de pesquisa
 slug: conectar-api-ao-fluxo-de-pesquisa
 status: a_fazer
 order: 41
+goal: Ligar o endpoint ao fluxo do Local Research Searcher sem antecipar automacoes maiores que o MVP.
 expected_evidence:
   - exemplo_reproduzivel
 ---

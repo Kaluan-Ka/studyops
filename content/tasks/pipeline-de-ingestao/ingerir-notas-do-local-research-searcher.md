@@ -6,6 +6,7 @@ title: Ingerir notas do Local Research Searcher
 slug: ingerir-notas-do-local-research-searcher
 status: a_fazer
 order: 53
+goal: Aplicar a ingestao em notas reais do projeto central para gerar evidencia de portfolio.
 expected_evidence:
   - exemplo_reproduzivel
 ---

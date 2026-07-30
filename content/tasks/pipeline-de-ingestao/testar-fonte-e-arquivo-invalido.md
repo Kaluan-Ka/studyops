@@ -6,6 +6,7 @@ title: Testar fonte e arquivo invalido
 slug: testar-fonte-e-arquivo-invalido
 status: a_fazer
 order: 52
+goal: Provar que o pipeline falha de forma clara quando a fonte ou o arquivo nao podem ser processados.
 expected_evidence:
   - teste_automatizado
 ---

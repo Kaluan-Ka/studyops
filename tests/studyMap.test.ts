@@ -75,3 +75,43 @@ test("buildStudyMap separa progresso real do inventario de conteudo", () => {
   assert.equal(map.realProgress.inventoryLabel, "2 evidências esperadas mapeadas");
   assert.equal("percentage" in map.realProgress, false);
 });
+
+test("buildStudyMap cria guia narrativo a servico do estudo", () => {
+  const fundamentos = [
+    fundament({
+      title: "CLI para ferramentas",
+      slug: "cli-para-ferramentas",
+      order: 1,
+      sections: [
+        {
+          title: "Leitura minima",
+          slug: "leitura-minima",
+          order: 1,
+          markdown: "",
+        },
+      ],
+      steps: [
+        {
+          id: "STEP-1",
+          title: "Contrato de uso",
+          slug: "contrato-de-uso",
+          order: 1,
+          expectedEvidence: ["nota_markdown", "teste_automatizado"],
+          tasks: [],
+        },
+      ],
+    }),
+  ];
+
+  const map = buildStudyMap(fundamentos);
+
+  assert.equal(map.narrativeGuide.speaker, "Navegadora de campo");
+  assert.equal(map.narrativeGuide.callSign, "N-01");
+  assert.equal(map.narrativeGuide.title, "Foco narrado: CLI para ferramentas");
+  assert.match(map.narrativeGuide.message, /Leitura minima/);
+  assert.equal(map.narrativeGuide.focusLabel, "Fundamento em foco");
+  assert.equal(map.narrativeGuide.focusValue, "CLI para ferramentas");
+  assert.equal(map.narrativeGuide.evidenceLabel, "2 evidências esperadas");
+  assert.equal(map.narrativeGuide.nextStepLabel, "Iniciar primeira sessão");
+  assert.equal(map.narrativeGuide.href, "/fundamentos/cli-para-ferramentas/sessoes/leitura-minima");
+});

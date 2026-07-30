@@ -6,6 +6,7 @@ title: Capturar stdout e stderr
 slug: capturar-stdout-e-stderr
 status: a_fazer
 order: 46
+goal: Separar resultado e diagnostico para que pipelines consigam interpretar a execucao.
 expected_evidence:
   - teste_automatizado
 ---

@@ -6,6 +6,7 @@ title: Testar nucleo da CLI
 slug: testar-nucleo-da-cli
 status: a_fazer
 order: 57
+goal: Cobrir o nucleo da CLI com teste automatizado para separar regra de interface.
 expected_evidence:
   - teste_automatizado
 ---

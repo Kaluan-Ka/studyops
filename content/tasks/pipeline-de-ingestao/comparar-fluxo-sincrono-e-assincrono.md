@@ -6,6 +6,7 @@ title: Comparar fluxo sincrono e assincrono
 slug: comparar-fluxo-sincrono-e-assincrono
 status: a_fazer
 order: 54
+goal: Comparar simplicidade e confiabilidade entre ingestao imediata e processamento em etapas.
 expected_evidence:
   - nota_markdown
 ---

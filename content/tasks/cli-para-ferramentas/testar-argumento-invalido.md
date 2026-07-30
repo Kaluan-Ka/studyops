@@ -6,6 +6,7 @@ title: Testar argumento invalido
 slug: testar-argumento-invalido
 status: a_fazer
 order: 34
+goal: Provar que a CLI comunica falhas de uso de forma observavel para humanos e scripts.
 expected_evidence:
   - teste_automatizado
 ---

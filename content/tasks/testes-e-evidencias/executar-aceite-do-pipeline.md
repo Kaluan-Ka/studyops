@@ -6,6 +6,7 @@ title: Executar aceite do pipeline
 slug: executar-aceite-do-pipeline
 status: a_fazer
 order: 59
+goal: Validar o pipeline ponta a ponta com um criterio de aceite simples e reproduzivel.
 expected_evidence:
   - teste_automatizado
   - exemplo_reproduzivel

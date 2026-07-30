@@ -6,6 +6,7 @@ title: Mapear niveis de teste
 slug: mapear-niveis-de-teste
 status: a_fazer
 order: 55
+goal: Entender quais niveis de teste comprovam comportamento sem transformar o MVP em burocracia.
 expected_evidence:
   - nota_markdown
 ---

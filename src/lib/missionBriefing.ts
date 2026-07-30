@@ -63,7 +63,7 @@ export function buildFundamentBriefing(fundament: Fundament): MissionBriefing {
       kicker: "Próxima ação da região",
       title: task.title,
       context: `Rota ${step.order}: ${step.title}`,
-      description: task.intro || "Abra a missão recomendada e produza a evidência mínima antes de ampliar a leitura.",
+      description: task.goal,
       primary: {
         href: taskHref(fundament, task),
         label: "Abrir missão",
@@ -114,7 +114,7 @@ export function buildStepBriefing(fundament: Fundament, step: Step): MissionBrie
     kicker: "Próxima ação da rota",
     title: task.title,
     context: `Missão ${task.order.toString().padStart(2, "0")} da rota`,
-    description: task.intro || "Execute a missão em uma entrega pequena e verificável.",
+    description: task.goal,
     primary: {
       href: taskHref(fundament, task),
       label: "Abrir missão",
@@ -135,7 +135,7 @@ export function buildTaskBriefing(fundament: Fundament, task: Task, step?: Step)
     kicker: "Próximo passo da missão",
     title: section?.title ?? task.title,
     context: step ? `Rota: ${step.title}` : `Fundamento: ${fundament.title}`,
-    description: "Avance por uma sessão curta, registre o que decidiu e conecte o resultado a uma evidência concreta.",
+    description: task.goal,
     primary: {
       href: section ? `${taskHref(fundament, task)}/sessoes/${section.slug}` : taskHref(fundament, task),
       label: section ? "Iniciar sessão" : "Revisar missão",

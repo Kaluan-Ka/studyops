@@ -6,6 +6,7 @@ title: Definir matriz de evidencias
 slug: definir-matriz-de-evidencias
 status: a_fazer
 order: 56
+goal: Organizar quais evidencias comprovam leitura, implementacao, teste, decisao e aplicacao em portfolio.
 expected_evidence:
   - nota_markdown
 ---
