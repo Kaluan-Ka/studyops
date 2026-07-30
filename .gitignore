@@ -55,6 +55,8 @@ yarn-error.log*
 *.sqlite3
 *.db
 *.dump
+/supabase/.branches/
+/supabase/.temp/
 
 # vercel
 .vercel
