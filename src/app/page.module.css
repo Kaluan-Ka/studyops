@@ -1626,6 +1626,193 @@
   color: #b7c9c7;
 }
 
+.realProgressPanel {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid rgba(139, 242, 142, 0.3);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(139, 242, 142, 0.12), transparent 40%),
+    rgba(7, 16, 22, 0.78);
+  color: #edf6f1;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.22);
+}
+
+.realProgressHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.realProgressHeader h2 {
+  max-width: 720px;
+  margin-top: 8px;
+  color: #f8f1d0;
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.12;
+}
+
+.realProgressHeader span,
+.realProgressFeedback {
+  color: #ffd45d;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.realProgressNotice {
+  margin: 0;
+  padding: 13px;
+  border: 1px solid rgba(255, 212, 93, 0.24);
+  background: rgba(255, 212, 93, 0.08);
+  color: #f8f1d0;
+  line-height: 1.5;
+}
+
+.realProgressGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: 16px;
+}
+
+.realProgressForm {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 16px;
+  border: 1px solid rgba(183, 201, 199, 0.2);
+  background: rgba(16, 23, 37, 0.72);
+}
+
+.realProgressForm fieldset {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.realProgressForm legend {
+  margin-bottom: 4px;
+  color: #69d8ff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.realProgressForm label {
+  display: grid;
+  gap: 7px;
+  color: #d0dfdc;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.realProgressForm input,
+.realProgressForm select,
+.realProgressForm textarea {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid rgba(183, 201, 199, 0.32);
+  border-radius: 4px;
+  background: rgba(7, 16, 22, 0.86);
+  color: #edf6f1;
+  font: inherit;
+}
+
+.realProgressForm input:focus-visible,
+.realProgressForm select:focus-visible,
+.realProgressForm textarea:focus-visible,
+.realProgressForm button:focus-visible {
+  outline: 3px solid #69d8ff;
+  outline-offset: 3px;
+}
+
+.realProgressForm textarea {
+  resize: vertical;
+}
+
+.realProgressForm button {
+  min-height: 42px;
+  padding: 9px 13px;
+  border: 1px solid #8bf28e;
+  border-radius: 4px;
+  background: #8bf28e;
+  color: #071016;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.realProgressForm button:disabled {
+  cursor: not-allowed;
+  opacity: 0.54;
+}
+
+.statusControlGroup {
+  display: grid;
+  gap: 8px;
+}
+
+.statusControlGroup label {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid rgba(183, 201, 199, 0.2);
+  background: rgba(7, 16, 22, 0.52);
+}
+
+.statusControlGroup input {
+  width: auto;
+}
+
+.evidenceDeck {
+  display: grid;
+  gap: 10px;
+}
+
+.evidenceItem {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid rgba(255, 212, 93, 0.28);
+  background: rgba(255, 212, 93, 0.08);
+}
+
+.evidenceItem span {
+  color: #ffd45d;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.evidenceItem h3 {
+  color: #edf6f1;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.evidenceItem p,
+.evidenceItem small {
+  color: #d0dfdc;
+  line-height: 1.5;
+}
+
+.evidenceItem a {
+  color: #8bf28e;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .missionSessionCard {
     transition: none;
@@ -1782,6 +1969,14 @@
   .regionHero,
   .readingMeta,
   .missionBriefing {
+    grid-template-columns: 1fr;
+  }
+
+  .realProgressHeader {
+    flex-direction: column;
+  }
+
+  .realProgressGrid {
     grid-template-columns: 1fr;
   }
 
