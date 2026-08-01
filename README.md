@@ -16,6 +16,19 @@ Supabase em uma etapa posterior.
 - Script Node/TypeScript para validacao e criacao de conteudo
 - Supabase e Vercel planejados para os proximos incrementos
 
+## Supabase local
+
+A primeira fatia de progresso persistido usa o schema versionado em
+`supabase/migrations/` e depende de variaveis publicas no ambiente local:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+```
+
+Use apenas a publishable key no cliente. Nunca coloque service role ou secrets
+em variaveis `NEXT_PUBLIC_`.
+
 ## Design
 
 A home atual e a referencia canonica da identidade visual do StudyOps. Ela define
