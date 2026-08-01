@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MissionBriefing } from "@/components/MissionBriefing";
+import { MissionProgressPanel } from "@/components/MissionProgressPanel";
 import { StudyNote } from "@/components/StudyNote";
 import { getFundamentos, getTaskBySlug } from "@/lib/content";
 import { buildTaskBriefing, formatEvidenceLabel, formatStatusLabel } from "@/lib/missionBriefing";
@@ -78,6 +79,8 @@ export default async function TaskPage({ params }: PageProps) {
         </section>
 
         <MissionBriefing briefing={briefing} />
+
+        <MissionProgressPanel contentId={task.id} missionTitle={task.title} />
 
         <section className={styles.missionSectionDeck} aria-labelledby="sessoes-titulo">
           <div className={styles.sectionHeader}>
