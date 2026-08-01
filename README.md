@@ -48,11 +48,18 @@ Antes de criar ou redesenhar telas, use:
 npm run content:validate
 npm run content:create -- fundamento "Hash Table"
 npm run content:create -- task FUN-000001 STEP-000001 "Implementar hashmap"
+npm run preview
 npm run lint
 npm run build
 ```
 
-`npm run build` executa a validacao de conteudo antes do build.
+`npm run build` executa a validacao de conteudo antes do build. Use
+`npm run preview` para inspecao visual local mais leve depois de um build ja
+existente. Use `npm run preview:fresh` quando quiser reconstruir tudo antes de
+abrir o servidor de preview.
+
+`npm run dev` continua disponivel para desenvolvimento com hot reload, mas
+consome mais CPU e memoria por usar o servidor de desenvolvimento do Next.js.
 
 ## Conteudo
 

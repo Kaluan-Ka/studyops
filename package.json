@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --disable-source-maps",
     "prebuild": "npm run content:validate",
     "build": "next build",
+    "preview": "next start",
+    "preview:fresh": "npm run build && next start",
     "start": "next start",
     "lint": "eslint",
     "content:validate": "tsx scripts/content.ts validate",
