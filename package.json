@@ -13,11 +13,11 @@
     "content:validate": "tsx scripts/content.ts validate",
     "content:create": "tsx scripts/content.ts create",
     "test": "tsx --test tests/*.test.ts",
-    "supabase:local:start": "supabase start",
-    "supabase:local:status": "supabase status",
-    "supabase:local:stop": "supabase stop",
+    "supabase:local:start": "bash scripts/supabase-local.sh start",
+    "supabase:local:status": "bash scripts/supabase-local.sh status",
+    "supabase:local:stop": "bash scripts/supabase-local.sh stop",
     "supabase:local:db:reset": "supabase db reset --local",
-    "supabase:local:migrations": "supabase migration list --local"
+    "supabase:local:migrations": "bash scripts/supabase-local.sh migration list --local"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.4",
