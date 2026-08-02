@@ -232,6 +232,17 @@
   margin-top: 12px;
 }
 
+.studyNoteGate {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid #c7d4cc;
+  background: #fffef8;
+  color: #2c3b34;
+  line-height: 1.5;
+}
+
 .studyNoteSave,
 .studyNoteClear {
   min-height: 40px;
