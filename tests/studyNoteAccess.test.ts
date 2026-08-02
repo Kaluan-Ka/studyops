@@ -4,7 +4,7 @@ import test from "node:test";
 import { getStudyNoteAuthView } from "../src/lib/studyNoteAccess";
 
 test("loading bloqueia a nota e não revela conteúdo local", () => {
-  assert.deepEqual(getStudyNoteAuthView("loading", false), {
+  assert.deepEqual(getStudyNoteAuthView("loading", null), {
     canMutate: false,
     mode: "loading",
     message: "Verificando sessão...",
@@ -13,7 +13,7 @@ test("loading bloqueia a nota e não revela conteúdo local", () => {
 });
 
 test("visitante recebe CTA para entrar com Google", () => {
-  assert.deepEqual(getStudyNoteAuthView("signed_out", false), {
+  assert.deepEqual(getStudyNoteAuthView("signed_out", null), {
     canMutate: false,
     mode: "locked",
     message: "Entre com Google para registrar uma nota.",
@@ -22,13 +22,13 @@ test("visitante recebe CTA para entrar com Google", () => {
 });
 
 test("configuração ausente e erro usam mensagens operacionais seguras", () => {
-  assert.deepEqual(getStudyNoteAuthView("unconfigured", false), {
+  assert.deepEqual(getStudyNoteAuthView("unconfigured", null), {
     canMutate: false,
     mode: "locked",
     message: "Modo leitura: autenticação não configurada neste ambiente.",
     showSignIn: false,
   });
-  assert.deepEqual(getStudyNoteAuthView("error", false), {
+  assert.deepEqual(getStudyNoteAuthView("error", "user-1"), {
     canMutate: false,
     mode: "locked",
     message: "Não foi possível verificar a sessão. Tente entrar novamente.",
@@ -37,10 +37,12 @@ test("configuração ausente e erro usam mensagens operacionais seguras", () => 
 });
 
 test("sessão autenticada com id libera a nota", () => {
-  assert.deepEqual(getStudyNoteAuthView("authenticated", true), {
+  assert.deepEqual(getStudyNoteAuthView("authenticated", "user-1"), {
     canMutate: true,
     mode: "ready",
     message: "",
     showSignIn: false,
   });
+
+  assert.equal(getStudyNoteAuthView("authenticated", "").canMutate, false);
 });

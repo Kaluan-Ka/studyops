@@ -26,7 +26,7 @@ type NoteState = "loading" | "empty" | "saved" | "dirty" | "error";
 
 export function StudyNote({ noteKey, label }: StudyNoteProps) {
   const { status: authStatus, user } = useAuth();
-  const authView = getStudyNoteAuthView(authStatus, Boolean(user?.id));
+  const authView = getStudyNoteAuthView(authStatus, user?.id);
   const [text, setText] = useState("");
   const [savedText, setSavedText] = useState("");
   const [state, setState] = useState<NoteState>("loading");

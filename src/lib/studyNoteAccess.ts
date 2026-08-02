@@ -9,9 +9,9 @@ export type StudyNoteAuthView = {
 
 export function getStudyNoteAuthView(
   status: AuthAccessStatus,
-  hasUserId: boolean,
+  userId?: string | null,
 ): StudyNoteAuthView {
-  const canMutate = canMutateWithAuth(status, hasUserId ? "user" : null);
+  const canMutate = canMutateWithAuth(status, userId);
 
   if (status === "loading") {
     return {
