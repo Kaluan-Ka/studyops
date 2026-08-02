@@ -105,6 +105,8 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
       }
 
       if (authStatus !== "authenticated" || !supabase || !user?.id) {
+        setProgress(null);
+        setEvidences([]);
         setState("loading");
         return;
       }
@@ -258,8 +260,9 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
       setArtifactPath("");
       setState("ready_saved");
       setFeedback("Evidencia persistida nesta missao.");
-    } catch (error) {
-      setFeedback(error instanceof Error ? error.message : "Revise a evidencia antes de salvar.");
+    } catch {
+      setState("error");
+      setFeedback("Revise a evidencia antes de salvar.");
     } finally {
       setIsSaving(false);
     }
