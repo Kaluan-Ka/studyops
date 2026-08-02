@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+
+import { AuthControl } from "@/components/AuthControl";
+import { AuthProvider } from "@/components/AuthProvider";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          <AuthControl />
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }
