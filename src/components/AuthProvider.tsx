@@ -75,17 +75,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const initialVersion = ++transitionVersion.current;
-    void client.auth.getUser().then(({ data, error }) => {
-      if (error) {
+
+    async function loadInitialUser() {
+      try {
+        const { data, error } = await client.auth.getUser();
+
+        if (error) {
+          if (active && isCurrentAuthTransition(transitionVersion.current, initialVersion)) {
+            setStatus("error");
+            setErrorMessage("Nao foi possivel verificar a sessao.");
+          }
+          return;
+        }
+
+        void applyUser(data.user, initialVersion);
+      } catch {
         if (active && isCurrentAuthTransition(transitionVersion.current, initialVersion)) {
           setStatus("error");
           setErrorMessage("Nao foi possivel verificar a sessao.");
         }
-        return;
       }
+    }
 
-      void applyUser(data.user, initialVersion);
-    });
+    void loadInitialUser();
 
     const { data: authListener } = client.auth.onAuthStateChange((_event, session) => {
       const version = ++transitionVersion.current;
@@ -113,13 +125,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    setErrorMessage(null);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: window.location.origin },
-    });
+    try {
+      setErrorMessage(null);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: window.location.origin },
+      });
 
-    if (error) {
+      if (error) {
+        setStatus("error");
+        setErrorMessage("Nao foi possivel iniciar o login com Google.");
+      }
+    } catch {
       setStatus("error");
       setErrorMessage("Nao foi possivel iniciar o login com Google.");
     }
@@ -130,8 +147,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    const { error } = await supabase.auth.signOut();
-    if (error) {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        setStatus("error");
+        setErrorMessage("Nao foi possivel sair da sessao.");
+      }
+    } catch {
       setStatus("error");
       setErrorMessage("Nao foi possivel sair da sessao.");
     }

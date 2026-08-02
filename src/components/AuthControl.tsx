@@ -34,7 +34,9 @@ export function AuthControl() {
   return (
     <div className={styles.authDock} aria-label="Autenticação do StudyOps">
       {status === "error" ? (
-        <span className={styles.authError}>{errorMessage ?? view.message}</span>
+        <span className={styles.authError} role="alert">
+          {errorMessage ?? view.message}
+        </span>
       ) : null}
       {view.action === "sign_out" ? (
         <>
