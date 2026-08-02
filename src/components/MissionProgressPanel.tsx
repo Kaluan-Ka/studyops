@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 
+import { GoogleSignInButton } from "@/components/AuthControl";
+import { useAuth } from "@/components/AuthProvider";
+import { canMutateWithAuth } from "@/lib/authAccess";
 import {
   buildEvidenceInsert,
   buildProgressUpsert,
@@ -10,11 +13,6 @@ import {
   type MissionEvidenceType,
   type MissionProgressStatus,
 } from "@/lib/missionProgress";
-import {
-  createSupabaseBrowserClient,
-  getSupabaseConfigurationState,
-} from "@/lib/supabase/client";
-
 import styles from "@/app/page.module.css";
 
 type MissionProgressRow = {
@@ -66,11 +64,9 @@ const evidenceTypes: Array<{ value: MissionEvidenceType; label: string }> = [
 ];
 
 export function MissionProgressPanel({ contentId, missionTitle }: MissionProgressPanelProps) {
-  const supabase = useMemo(() => createSupabaseBrowserClient(), []);
-  const [state, setState] = useState<PanelState>(
-    getSupabaseConfigurationState() === "configured" ? "loading" : "unconfigured",
-  );
-  const [userId, setUserId] = useState("");
+  const { status: authStatus, user, supabase, errorMessage } = useAuth();
+  const canMutate = canMutateWithAuth(authStatus, user?.id);
+  const [state, setState] = useState<PanelState>("loading");
   const [progress, setProgress] = useState<MissionProgressRow | null>(null);
   const [evidences, setEvidences] = useState<MissionEvidenceRow[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<MissionProgressStatus>("in_progress");
@@ -86,25 +82,34 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
     let active = true;
 
     async function loadProgress() {
-      if (!supabase) {
+      if (authStatus === "unconfigured") {
+        setProgress(null);
+        setEvidences([]);
         setState("unconfigured");
         return;
       }
 
-      setState("loading");
-
-      const { data: userResult, error: userError } = await supabase.auth.getUser();
-
-      if (!active) {
-        return;
-      }
-
-      if (userError || !userResult.user) {
+      if (authStatus === "signed_out") {
+        setProgress(null);
+        setEvidences([]);
         setState("signed_out");
         return;
       }
 
-      setUserId(userResult.user.id);
+      if (authStatus === "error") {
+        setProgress(null);
+        setEvidences([]);
+        setState("error");
+        setFeedback(errorMessage || "Nao foi possivel verificar a sessao.");
+        return;
+      }
+
+      if (authStatus !== "authenticated" || !supabase || !user?.id) {
+        setState("loading");
+        return;
+      }
+
+      setState("loading");
 
       const { data: progressRow, error: progressError } = await supabase
         .from("mission_progress")
@@ -160,12 +165,13 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
     return () => {
       active = false;
     };
-  }, [contentId, supabase]);
+  }, [authStatus, contentId, errorMessage, supabase, user?.id]);
 
   async function handleStatusSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!supabase || !userId) {
+    if (!canMutate || !supabase || !user?.id) {
+      setFeedback("Entre com Google para registrar esta ação.");
       return;
     }
 
@@ -174,7 +180,7 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
 
     try {
       const payload = buildProgressUpsert({
-        userId,
+        userId: user.id,
         contentId,
         nextStatus: selectedStatus,
         currentStartedAt: progress?.started_at,
@@ -206,7 +212,8 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
   async function handleEvidenceSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!supabase || !userId) {
+    if (!canMutate || !supabase || !user?.id) {
+      setFeedback("Entre com Google para registrar esta ação.");
       return;
     }
 
@@ -223,7 +230,7 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
       }
 
       const payload = buildEvidenceInsert({
-        userId,
+        userId: user.id,
         progressId: currentProgress.id,
         evidenceType,
         title: evidenceTitle,
@@ -259,12 +266,12 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
   }
 
   async function ensureProgress(): Promise<MissionProgressRow | null> {
-    if (!supabase || !userId) {
+    if (!canMutate || !supabase || !user?.id) {
       return null;
     }
 
     const payload = buildProgressUpsert({
-      userId,
+      userId: user.id,
       contentId,
       nextStatus: selectedStatus,
       currentStartedAt: progress?.started_at,
@@ -306,9 +313,10 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
       ) : null}
 
       {state === "signed_out" ? (
-        <p className={styles.realProgressNotice}>
-          Entre com Supabase Auth para registrar progresso real desta missao.
-        </p>
+        <div className={styles.realProgressNotice}>
+          <p>Leia a missão livremente. Entre com Google para iniciar, registrar status ou salvar evidências.</p>
+          <GoogleSignInButton compact />
+        </div>
       ) : null}
 
       {state === "loading" ? (
@@ -321,7 +329,7 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
         </p>
       ) : null}
 
-      {state === "ready_empty" || state === "ready_saved" || state === "error" ? (
+      {canMutate && (state === "ready_empty" || state === "ready_saved" || state === "error") ? (
         <div className={styles.realProgressGrid}>
           <form className={styles.realProgressForm} onSubmit={handleStatusSubmit}>
             <fieldset>
@@ -341,7 +349,7 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
                 ))}
               </div>
             </fieldset>
-            <button type="submit" disabled={isSaving || !userId}>
+            <button type="submit" disabled={isSaving || !canMutate}>
               Salvar estado
             </button>
           </form>
@@ -394,7 +402,7 @@ export function MissionProgressPanel({ contentId, missionTitle }: MissionProgres
                 />
               </label>
             </fieldset>
-            <button type="submit" disabled={isSaving || !userId}>
+            <button type="submit" disabled={isSaving || !canMutate}>
               Salvar evidencia
             </button>
           </form>
