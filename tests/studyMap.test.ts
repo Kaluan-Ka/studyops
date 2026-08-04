@@ -40,7 +40,7 @@ test("buildStudyMap cria tiles ativos, briefing e territorios futuros", () => {
   );
 });
 
-test("buildStudyMap separa progresso real do inventario de conteudo", () => {
+test("buildStudyMap mantem apenas inventario publico de conteudo", () => {
   const fundamentos = [
     fundament({
       title: "CLI para ferramentas",
@@ -69,11 +69,10 @@ test("buildStudyMap separa progresso real do inventario de conteudo", () => {
 
   const map = buildStudyMap(fundamentos);
 
-  assert.equal(map.realProgress.state, "waiting_for_supabase");
-  assert.equal(map.realProgress.label, "Progresso real");
-  assert.match(map.realProgress.description, /Supabase/);
-  assert.equal(map.realProgress.inventoryLabel, "2 evidências esperadas mapeadas");
-  assert.equal("percentage" in map.realProgress, false);
+  assert.equal(map.contentInventory.label, "Inventário público");
+  assert.equal(map.contentInventory.evidenceLabel, "2 evidências esperadas mapeadas");
+  assert.equal(map.contentInventory.missionLabel, "0 missões públicas no mapa");
+  assert.equal("realProgress" in map, false);
 });
 
 test("buildStudyMap cria guia narrativo a servico do estudo", () => {

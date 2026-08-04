@@ -49,12 +49,10 @@ export type StudyMapViewModel = {
     sessoes: number;
     evidencias: number;
   };
-  realProgress: {
-    state: "waiting_for_supabase";
+  contentInventory: {
     label: string;
-    statusLabel: string;
-    description: string;
-    inventoryLabel: string;
+    missionLabel: string;
+    evidenceLabel: string;
   };
 };
 
@@ -110,13 +108,10 @@ export function buildStudyMap(fundamentos: Fundament[]): StudyMapViewModel {
     ],
     narrativeGuide: buildNarrativeGuide(tiles[0]),
     stats,
-    realProgress: {
-      state: "waiting_for_supabase",
-      label: "Progresso real",
-      statusLabel: "Aguardando Supabase",
-      description:
-        "A barra volta quando o Supabase persistir evidências, tarefas e ciclos concluídos.",
-      inventoryLabel: `${stats.evidencias} evidências esperadas mapeadas`,
+    contentInventory: {
+      label: "Inventário público",
+      missionLabel: `${stats.tarefas} ${pluralizeMission(stats.tarefas)} públicas no mapa`,
+      evidenceLabel: `${stats.evidencias} evidências esperadas mapeadas`,
     },
   };
 }
@@ -155,4 +150,8 @@ function buildNarrativeGuide(currentTile: StudyMapTile | undefined): StudyNarrat
 
 function pluralizeEvidence(count: number): string {
   return count === 1 ? "evidência" : "evidências";
+}
+
+function pluralizeMission(count: number): string {
+  return count === 1 ? "missão" : "missões";
 }

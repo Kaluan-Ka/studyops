@@ -577,6 +577,63 @@
   line-height: 1.35;
 }
 
+.progressBar {
+  overflow: hidden;
+  height: 10px;
+  border: 1px solid rgba(255, 212, 93, 0.38);
+  background: rgba(7, 16, 22, 0.82);
+}
+
+.progressBar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ffd45d, #8bf28e);
+  box-shadow: 0 0 18px rgba(255, 212, 93, 0.34);
+}
+
+.progressAuthNotice {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid rgba(139, 242, 142, 0.24);
+  background: rgba(7, 16, 22, 0.56);
+}
+
+.progressAuthNotice p,
+.progressError {
+  color: #d0dfdc;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.progressError {
+  color: #ffd45d;
+}
+
+.progressEvidenceList {
+  display: grid;
+  gap: 8px;
+}
+
+.progressEvidenceList article {
+  padding: 10px;
+  border: 1px solid rgba(255, 212, 93, 0.22);
+  background: rgba(7, 16, 22, 0.62);
+}
+
+.progressEvidenceList article span {
+  color: #ffd45d;
+  font-size: 9px;
+}
+
+.progressEvidenceList article strong {
+  display: block;
+  margin-top: 4px;
+  color: #edf6f1;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
 .briefingCard {
   display: grid;
   gap: 10px;

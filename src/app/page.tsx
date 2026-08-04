@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { HomeProgressModule } from "@/components/HomeProgressModule";
 import { getFundamentos } from "@/lib/content";
 import { buildStudyMap, type StudyMapTile } from "@/lib/studyMap";
 
@@ -17,6 +18,9 @@ export default function Home() {
   const fundamentos = getFundamentos();
   const studyMap = buildStudyMap(fundamentos);
   const currentTile = studyMap.currentTile;
+  const missionIds = fundamentos.flatMap((fundamento) => (
+    fundamento.tasks.map((task) => task.id)
+  ));
 
   return (
     <div className={styles.page}>
@@ -136,23 +140,11 @@ export default function Home() {
               </div>
             </section>
 
-            <div className={styles.progressModule}>
-              <span>{studyMap.realProgress.label}</span>
-              <strong>{studyMap.realProgress.statusLabel}</strong>
-              <p>{studyMap.realProgress.description}</p>
-              <dl className={styles.progressInventory}>
-                <div>
-                  <dt>Inventário</dt>
-                  <dd>{studyMap.realProgress.inventoryLabel}</dd>
-                </div>
-                <div>
-                  <dt>Bloco ativo</dt>
-                  <dd>
-                    {studyMap.stats.fundamentos} fundamentos · {studyMap.stats.tarefas} missões
-                  </dd>
-                </div>
-              </dl>
-            </div>
+            <HomeProgressModule
+              missionIds={missionIds}
+              missionInventoryLabel={studyMap.contentInventory.missionLabel}
+              evidenceInventoryLabel={studyMap.contentInventory.evidenceLabel}
+            />
 
             {currentTile ? (
               <article className={styles.briefingCard}>
