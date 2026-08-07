@@ -1,0 +1,535 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(105, 216, 255, 0.14), transparent 25rem),
+    radial-gradient(circle at 86% 20%, rgba(255, 212, 93, 0.1), transparent 22rem),
+    linear-gradient(135deg, #071016 0%, #101725 56%, #1b1628 100%);
+  color: #edf6f1;
+}
+
+.header {
+  display: flex;
+  width: min(1240px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 22px 180px 22px 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgba(183, 201, 199, 0.16);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffd45d;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.brand::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 2px solid #8bf28e;
+  background: #101725;
+  box-shadow: 0 0 20px rgba(139, 242, 142, 0.68);
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%);
+}
+
+.header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #b7c9c7;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.header nav a,
+.quietButton,
+.textButton {
+  border: 1px solid rgba(183, 201, 199, 0.18);
+  background: rgba(7, 16, 22, 0.52);
+  color: inherit;
+  cursor: pointer;
+}
+
+.header nav a {
+  padding: 8px 10px;
+}
+
+.header nav a:hover,
+.header nav a:focus-visible,
+.quietButton:hover,
+.quietButton:focus-visible,
+.textButton:hover,
+.textButton:focus-visible {
+  border-color: rgba(105, 216, 255, 0.72);
+  color: #edf6f1;
+}
+
+.main {
+  width: min(1240px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 34px 0 76px;
+}
+
+.workspace {
+  display: grid;
+  gap: 20px;
+}
+
+.introPanel,
+.formPanel,
+.cyclesPanel,
+.statusPanel {
+  border: 1px solid rgba(183, 201, 199, 0.2);
+  background: rgba(7, 16, 22, 0.74);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
+}
+
+.introPanel {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  padding: clamp(24px, 4vw, 42px);
+  background:
+    linear-gradient(rgba(105, 216, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(105, 216, 255, 0.05) 1px, transparent 1px),
+    rgba(7, 16, 22, 0.74);
+  background-size: 32px 32px;
+}
+
+.eyebrow,
+.panelKicker,
+.cardKicker,
+.taskStackHeader span,
+.cycleNotes span,
+.taskCard span,
+.telemetry span {
+  color: #8bf28e;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.introPanel h1,
+.statusPanel h1 {
+  margin-top: 10px;
+  color: #f8f1d0;
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1.02;
+}
+
+.introPanel p:last-child,
+.statusPanel > p:last-of-type {
+  max-width: 700px;
+  margin-top: 16px;
+  color: #d0dfdc;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.telemetry {
+  min-width: 190px;
+  padding: 16px;
+  border-left: 3px solid #69d8ff;
+  background: rgba(16, 23, 37, 0.8);
+}
+
+.telemetry strong {
+  display: block;
+  margin: 6px 0;
+  color: #69d8ff;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.telemetry small {
+  color: #b7c9c7;
+  line-height: 1.4;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.formPanel,
+.cyclesPanel {
+  padding: 24px;
+}
+
+.panelHeader,
+.cycleCardHeader,
+.taskStackHeader,
+.cardFooter {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.panelHeader h2 {
+  margin-top: 6px;
+  font-size: 22px;
+}
+
+.panelMeta {
+  color: #69d8ff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.quietButton,
+.textButton {
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.cycleForm,
+.taskForm {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.cycleForm label,
+.taskForm label {
+  display: grid;
+  gap: 7px;
+  color: #d0dfdc;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.cycleForm input,
+.cycleForm textarea,
+.cycleForm select,
+.taskForm input,
+.taskForm select,
+.taskStatus select {
+  width: 100%;
+  border: 1px solid rgba(183, 201, 199, 0.28);
+  border-radius: 4px;
+  background: #101725;
+  color: #edf6f1;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.cycleForm input,
+.cycleForm select,
+.taskForm input,
+.taskForm select,
+.taskStatus select {
+  min-height: 42px;
+  padding: 9px 10px;
+}
+
+.cycleForm textarea {
+  min-height: 92px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.cycleForm input:focus-visible,
+.cycleForm textarea:focus-visible,
+.cycleForm select:focus-visible,
+.taskForm input:focus-visible,
+.taskForm select:focus-visible,
+.taskStatus select:focus-visible,
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.statusAction button:focus-visible {
+  outline: 3px solid #69d8ff;
+  outline-offset: 3px;
+}
+
+.primaryButton,
+.secondaryButton {
+  border: 1px solid #8bf28e;
+  border-radius: 4px;
+  padding: 11px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.primaryButton {
+  background: #8bf28e;
+  color: #071016;
+}
+
+.secondaryButton {
+  background: transparent;
+  color: #8bf28e;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.cycleList {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.cycleCard {
+  padding: 18px;
+  border: 1px solid rgba(183, 201, 199, 0.23);
+  background: #eef2e6;
+  color: #071016;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cycleCardHeader h3 {
+  max-width: 620px;
+  margin-top: 8px;
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.cardKicker,
+.cycleNotes span,
+.taskCard span,
+.taskStackHeader span {
+  color: #4f6867;
+}
+
+.statusBadge {
+  flex: 0 0 auto;
+  padding: 6px 8px;
+  background: #ffd45d;
+  color: #071016;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cycleNotes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(7, 16, 22, 0.16);
+}
+
+.cycleNotes p {
+  margin-top: 6px;
+  color: #304340;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.taskStack {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.taskStackHeader {
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(7, 16, 22, 0.16);
+}
+
+.taskStackHeader strong {
+  color: #4f6867;
+  font-size: 12px;
+}
+
+.taskCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 142px;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid rgba(7, 16, 22, 0.16);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.taskCard strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.taskCard p {
+  margin-top: 5px;
+  color: #4f6867;
+  font-size: 12px;
+}
+
+.taskStatus {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+}
+
+.taskStatus small {
+  color: #4f6867;
+  font-size: 10px;
+}
+
+.taskForm {
+  grid-template-columns: minmax(0, 1.3fr) minmax(160px, 0.7fr) auto;
+  align-items: end;
+  gap: 9px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(7, 16, 22, 0.2);
+}
+
+.taskForm label {
+  color: #4f6867;
+}
+
+.taskForm .secondaryButton {
+  min-height: 42px;
+}
+
+.cardFooter {
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(7, 16, 22, 0.16);
+  color: #4f6867;
+  font-size: 12px;
+}
+
+.textButton {
+  border-color: rgba(7, 16, 22, 0.22);
+  background: transparent;
+  color: #071016;
+}
+
+.emptyState,
+.statusPanel {
+  padding: 28px;
+}
+
+.emptyState {
+  margin-top: 22px;
+  border: 1px dashed rgba(183, 201, 199, 0.28);
+  color: #d0dfdc;
+}
+
+.emptyState p {
+  margin-top: 7px;
+  color: #b7c9c7;
+  line-height: 1.5;
+}
+
+.muted,
+.error,
+.feedback {
+  margin-top: 18px;
+  color: #b7c9c7;
+  line-height: 1.5;
+}
+
+.error {
+  color: #ffd45d;
+}
+
+.feedback {
+  padding: 12px 14px;
+  border-left: 3px solid #8bf28e;
+  background: rgba(139, 242, 142, 0.08);
+}
+
+.statusPanel {
+  max-width: 720px;
+  margin: 80px auto 0;
+  border-radius: 8px;
+}
+
+.statusPanel h1 {
+  font-size: clamp(32px, 5vw, 52px);
+}
+
+.statusAction {
+  margin-top: 20px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .introPanel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .telemetry {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .header,
+  .main {
+    width: min(100% - 24px, 1240px);
+  }
+
+  .header {
+    align-items: start;
+    flex-direction: column;
+    padding-right: 0;
+  }
+
+  .introPanel,
+  .formPanel,
+  .cyclesPanel {
+    padding: 18px;
+  }
+
+  .formGrid,
+  .cycleNotes,
+  .taskForm {
+    grid-template-columns: 1fr;
+  }
+
+  .taskCard {
+    grid-template-columns: 1fr;
+  }
+
+  .taskStatus {
+    justify-items: start;
+  }
+}

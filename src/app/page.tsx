@@ -32,6 +32,7 @@ export default function Home() {
           <a href="#mapa">Mapa</a>
           <a href="#missoes">Missões</a>
           <a href="#evidencias">Evidências</a>
+          <Link href="/ciclos">Ciclos</Link>
         </nav>
       </header>
 

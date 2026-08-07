@@ -14,7 +14,7 @@
   z-index: 4;
   width: min(1240px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 22px 0;
+  padding: 22px 180px 22px 0;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
@@ -1899,6 +1899,7 @@
   .header {
     align-items: flex-start;
     flex-direction: column;
+    padding-right: 0;
   }
 
   .main {
