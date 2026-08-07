@@ -1,5 +1,7 @@
 # StudyOps
 
+> Este projeto foi desenvolvido inteiramente no Codex.
+
 StudyOps e uma webapp pessoal para acompanhar a trilha de Engenharia de IA e
 transformar estudo em evidencias de portfolio.
 
@@ -33,20 +35,26 @@ https://<project-ref>.supabase.co/auth/v1/callback
 ```
 
 Em `Authentication > URL Configuration`, cadastre a URL local e a URL de
-producao como Site URL/Redirect URL, por exemplo:
-
-```txt
-http://localhost:3000
-https://seu-dominio.example
-```
+producao como Site URL/Redirect URL.
 
 O app envia a origem atual como `redirectTo`, portanto cada origem usada para
 testar ou publicar precisa estar permitida no Supabase.
 
+## Ciclos de estudo
+
+A rota `/ciclos` e a primeira fatia vertical de planejamento semanal do
+StudyOps. Ela permite que uma pessoa autenticada:
+
+- crie ciclos com inicio, fim, objetivo e status;
+- associe tarefas existentes do catalogo Markdown ao ciclo;
+- acompanhe o estado real dessas tarefas a partir de `mission_progress`;
+- atualize o status da missao sem duplicar esse estado no ciclo;
+- registre revisao e proximo passo ao concluir o ciclo.
+
 ## Supabase local
 
-A primeira fatia de progresso persistido usa o schema versionado em
-`supabase/migrations/` e depende de variaveis publicas no ambiente local:
+O progresso persistido e os ciclos usam o schema versionado em
+`supabase/migrations/` e dependem de variaveis publicas no ambiente local:
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=
@@ -61,11 +69,18 @@ Para iniciar o ambiente local e aplicar as migrations:
 ```bash
 npm run supabase:local:start
 npm run supabase:local:status
+npm run supabase:local:db:reset
 ```
 
 A migration de autenticacao cria `public.profiles` automaticamente depois de
 um novo usuario em `auth.users`. O cliente tambem faz um upsert idempotente do
 profile durante a sessao para reparar usuarios criados antes do trigger.
+
+Para conferir as migrations aplicadas no ambiente local:
+
+```bash
+npm run supabase:local:migrations
+```
 
 Depois de configurar o provider Google, rode a aplicacao com:
 
@@ -75,6 +90,37 @@ npm run dev
 
 Visitantes continuam navegando pelo conteudo. Ao clicar em qualquer controle
 de escrita, entram com Google e retornam para a origem atual.
+
+## Deploy na Vercel
+
+Antes do deploy, aplique as migrations no projeto Supabase de producao. O
+deploy na Vercel nao executa migrations automaticamente; a migration dos ciclos
+precisa existir no Supabase antes de publicar a versao que usa `/ciclos`.
+
+No projeto da Vercel, configure apenas as variaveis publicas usadas pelo
+browser client:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+```
+
+No Supabase, adicione a URL de producao da Vercel em
+`Authentication > URL Configuration` como Site URL/Redirect URL. No Google
+Cloud, mantenha o callback OAuth apontando para:
+
+```txt
+https://<project-ref>.supabase.co/auth/v1/callback
+```
+
+Antes de publicar, rode localmente:
+
+```bash
+npm test
+npm run lint
+npm run content:validate
+npm run build
+```
 
 ## Design
 
