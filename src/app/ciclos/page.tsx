@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { StudyCyclesWorkspace } from "@/components/StudyCyclesWorkspace";
-import { getFundamentos } from "@/lib/content";
+import { getFundamentos, getProjects } from "@/lib/content";
 
 import styles from "./page.module.css";
 
@@ -13,6 +13,7 @@ export default function StudyCyclesPage() {
       fundamentTitle: fundament.title,
     })),
   );
+  const projectOptions = getProjects().map((project) => ({ id: project.id, title: project.title }));
 
   return (
     <div className={styles.page}>
@@ -22,10 +23,12 @@ export default function StudyCyclesPage() {
           <Link href="/">Mapa</Link>
           <Link href="/#missoes">Missões</Link>
           <Link href="/ciclos" aria-current="page">Ciclos</Link>
+          <Link href="/projetos">Projetos</Link>
+          <Link href="/progresso">Progresso</Link>
         </nav>
       </header>
       <main className={styles.main}>
-        <StudyCyclesWorkspace taskOptions={taskOptions} />
+        <StudyCyclesWorkspace taskOptions={taskOptions} projectOptions={projectOptions} />
       </main>
     </div>
   );

@@ -88,6 +88,13 @@ export default async function TaskSessionPage({ params }: PageProps) {
                   taskSlug: task.slug,
                   sessionSlug: section.slug,
                 })}
+                target={{ scope: "task-session", taskId: task.id, sessionSlug: section.slug }}
+                legacyTarget={{
+                  scope: "task-session",
+                  fundamentSlug: task.fundament.slug,
+                  taskSlug: task.slug,
+                  sessionSlug: section.slug,
+                }}
                 label="Registro de campo desta sessão"
               />
             </div>

@@ -73,7 +73,8 @@ function validateContent(): void {
 
   validateRegistry(registry, errors);
   const fundamentos = readFundamentos(registry, errors);
-  readTasks(registry, fundamentos, errors);
+  const taskIds = readTasks(registry, fundamentos, errors);
+  readProjects(registry, fundamentos, taskIds, errors);
   validateSummaries(errors);
 
   if (errors.length > 0) {
@@ -354,7 +355,7 @@ function readTasks(
   registry: Registry,
   fundamentos: Map<string, Fundament>,
   errors: string[],
-): void {
+): Set<string> {
   const files = listMarkdownFiles(path.join(contentDir, "tasks"));
   const taskIds = new Set<string>();
 
@@ -402,6 +403,68 @@ function readTasks(
       errors.push(
         `${relative(filePath)}: etapa_id ${etapaId} nao pertence a ${fundamentoId}.`,
       );
+    }
+  }
+
+  return taskIds;
+}
+
+function readProjects(
+  registry: Registry,
+  fundamentos: Map<string, Fundament>,
+  taskIds: Set<string>,
+  errors: string[],
+): void {
+  const files = listMarkdownFiles(path.join(contentDir, "projetos"));
+  const projectIds = new Set<string>();
+  const projectSlugs = new Set<string>();
+
+  for (const filePath of files) {
+    const data = readFrontmatter(filePath, errors);
+    if (!data) {
+      continue;
+    }
+
+    requireString(data, "id", filePath, errors);
+    requireString(data, "title", filePath, errors);
+    requireString(data, "slug", filePath, errors);
+    requireString(data, "status", filePath, errors);
+    requireNumber(data, "order", filePath, errors);
+    requireString(data, "summary", filePath, errors);
+
+    const id = getString(data, "id");
+    const slug = getString(data, "slug");
+    const fundamentIds = getStringArray(data, "fundament_ids", filePath, errors);
+    const relatedTaskIds = getStringArray(data, "task_ids", filePath, errors);
+
+    if (id) {
+      if (projectIds.has(id)) {
+        errors.push(`${relative(filePath)}: ID duplicado no conteudo: ${id}`);
+      }
+      projectIds.add(id);
+
+      if (!registry.issued.projects.includes(id)) {
+        errors.push(`${relative(filePath)}: projeto ${id} nao consta no registry.`);
+      }
+    }
+
+    if (slug) {
+      if (projectSlugs.has(slug)) {
+        errors.push(`${relative(filePath)}: slug de projeto duplicado: ${slug}`);
+      }
+      projectSlugs.add(slug);
+    }
+
+    for (const fundamentId of fundamentIds) {
+      if (!fundamentos.has(fundamentId)) {
+        errors.push(`${relative(filePath)}: fundament_ids orfao: ${fundamentId}`);
+      }
+    }
+
+    for (const taskId of relatedTaskIds) {
+      if (!taskIds.has(taskId)) {
+        errors.push(`${relative(filePath)}: task_ids orfao: ${taskId}`);
+      }
     }
   }
 }
@@ -534,6 +597,20 @@ function requireNumber(
 
 function getString(data: Record<string, unknown>, key: string): string {
   return typeof data[key] === "string" ? data[key] : "";
+}
+
+function getStringArray(
+  data: Record<string, unknown>,
+  key: string,
+  filePath: string,
+  errors: string[],
+): string[] {
+  if (!Array.isArray(data[key]) || data[key].some((value) => typeof value !== "string")) {
+    errors.push(`${relative(filePath)}: ${key} deve ser um array de strings.`);
+    return [];
+  }
+
+  return data[key] as string[];
 }
 
 function asRecord(value: unknown): Record<string, unknown> | null {

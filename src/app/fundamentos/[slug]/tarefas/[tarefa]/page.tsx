@@ -106,6 +106,12 @@ export default async function TaskPage({ params }: PageProps) {
             fundamentSlug: task.fundament.slug,
             taskSlug: task.slug,
           })}
+          target={{ scope: "task", fundamentId: task.fundament.id, taskId: task.id }}
+          legacyTarget={{
+            scope: "task",
+            fundamentSlug: task.fundament.slug,
+            taskSlug: task.slug,
+          }}
           label="Registro de campo da missão"
         />
       </main>

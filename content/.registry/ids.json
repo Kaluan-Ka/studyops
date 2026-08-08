@@ -57,7 +57,13 @@
       "TASK-000059",
       "TASK-000060"
     ],
-    "projects": [],
+    "projects": [
+      "PROJ-000001",
+      "PROJ-000002",
+      "PROJ-000003",
+      "PROJ-000004",
+      "PROJ-000005"
+    ],
     "evidence": []
   },
   "deprecated": {

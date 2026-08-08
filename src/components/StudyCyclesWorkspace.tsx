@@ -30,6 +30,8 @@ type TaskOption = {
   fundamentTitle: string;
 };
 
+type ProjectOption = { id: string; title: string };
+
 type CycleRow = {
   id: string;
   user_id: string;
@@ -65,9 +67,13 @@ type CycleTaskView = CycleTaskRow & {
   mission: MissionProgressRow;
 };
 
+type CycleProjectRow = { id: string; user_id: string; cycle_id: string; project_id: string; position: number };
+type CycleProjectView = CycleProjectRow & { title: string };
+
 type CycleView = {
   cycle: CycleRow;
   tasks: CycleTaskView[];
+  projects: CycleProjectView[];
 };
 
 type CycleForm = {
@@ -105,7 +111,7 @@ const missionStatusOptions: Array<{ value: MissionProgressStatus; label: string 
   { value: "completed", label: "Concluída" },
 ];
 
-export function StudyCyclesWorkspace({ taskOptions }: { taskOptions: TaskOption[] }) {
+export function StudyCyclesWorkspace({ taskOptions, projectOptions }: { taskOptions: TaskOption[]; projectOptions: ProjectOption[] }) {
   const { status: authStatus, user, supabase, errorMessage } = useAuth();
   const canMutate = canMutateWithAuth(authStatus, user?.id);
   const [state, setState] = useState<WorkspaceState>("loading");
@@ -113,6 +119,7 @@ export function StudyCyclesWorkspace({ taskOptions }: { taskOptions: TaskOption[
   const [form, setForm] = useState<CycleForm>(makeInitialCycleForm);
   const [editingCycleId, setEditingCycleId] = useState<string | null>(null);
   const [taskDrafts, setTaskDrafts] = useState<Record<string, TaskDraft>>({});
+  const [projectDrafts, setProjectDrafts] = useState<Record<string, string>>({});
   const [feedback, setFeedback] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const loadSequence = useRef(0);
@@ -184,6 +191,19 @@ export function StudyCyclesWorkspace({ taskOptions }: { taskOptions: TaskOption[
     }
 
     const typedTasks = (taskRows ?? []) as CycleTaskRow[];
+    const { data: projectRows, error: projectError } = cycleIds.length
+      ? await supabase
+        .from("study_cycle_projects")
+        .select("id,user_id,cycle_id,project_id,position")
+        .in("cycle_id", cycleIds)
+        .order("position", { ascending: true })
+      : { data: [], error: null };
+
+    if (sequence !== loadSequence.current) return null;
+    if (projectError) {
+      return { state: "error", cycles: [], message: "Não foi possível carregar os projetos dos ciclos." };
+    }
+
     const contentIds = [...new Set(typedTasks.map((task) => task.content_id))];
     const { data: progressRows, error: progressError } = contentIds.length
       ? await supabase
@@ -211,6 +231,8 @@ export function StudyCyclesWorkspace({ taskOptions }: { taskOptions: TaskOption[
       ]),
     );
     const optionsById = new Map(taskOptions.map((option) => [option.id, option]));
+    const projectsById = new Map(projectOptions.map((option) => [option.id, option]));
+    const typedProjects = (projectRows ?? []) as CycleProjectRow[];
     const nextCycles = typedCycles.map((cycle) => ({
       cycle,
       tasks: typedTasks
@@ -226,10 +248,16 @@ export function StudyCyclesWorkspace({ taskOptions }: { taskOptions: TaskOption[
             completed_at: null,
           },
         })),
+      projects: typedProjects
+        .filter((project) => project.cycle_id === cycle.id)
+        .map((project) => ({
+          ...project,
+          title: projectsById.get(project.project_id)?.title ?? project.project_id,
+        })),
     }));
 
     return { state: "ready", cycles: nextCycles };
-  }, [authStatus, errorMessage, supabase, taskOptions, user?.id]);
+  }, [authStatus, errorMessage, projectOptions, supabase, taskOptions, user?.id]);
 
   const applyCycleLoadResult = useCallback((result: CycleLoadResult) => {
     setCycles(result.cycles);
@@ -423,6 +451,57 @@ export function StudyCyclesWorkspace({ taskOptions }: { taskOptions: TaskOption[
     } catch (error) {
       setState("error");
       setFeedback(getDatabaseErrorMessage(error, "Não foi possível associar a tarefa."));
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  async function handleProjectSubmit(event: FormEvent<HTMLFormElement>, cycle: CycleView) {
+    event.preventDefault();
+    if (!canMutate || !supabase || !user?.id) {
+      setFeedback("Entre com Google para associar um projeto.");
+      return;
+    }
+
+    const projectId = projectDrafts[cycle.cycle.id] ?? "";
+    if (!projectId || cycle.projects.some((project) => project.project_id === projectId)) {
+      setFeedback("Escolha um projeto novo para este ciclo.");
+      return;
+    }
+
+    setIsSaving(true);
+    setFeedback("");
+    try {
+      const { error } = await supabase.from("study_cycle_projects").insert({
+        user_id: user.id,
+        cycle_id: cycle.cycle.id,
+        project_id: projectId,
+        position: cycle.projects.length + 1,
+      });
+      if (error) throw error;
+      setProjectDrafts((current) => ({ ...current, [cycle.cycle.id]: "" }));
+      setFeedback("Projeto associado ao ciclo.");
+      await refreshCycles();
+    } catch (error) {
+      setState("error");
+      setFeedback(getDatabaseErrorMessage(error, "Não foi possível associar o projeto."));
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  async function handleRemoveTask(task: CycleTaskView) {
+    if (!canMutate || !supabase) return;
+    setIsSaving(true);
+    setFeedback("");
+    try {
+      const { error } = await supabase.from("study_cycle_tasks").delete().eq("id", task.id);
+      if (error) throw error;
+      setFeedback("Tarefa removida do ciclo.");
+      await refreshCycles();
+    } catch (error) {
+      setState("error");
+      setFeedback(getDatabaseErrorMessage(error, "Não foi possível remover a tarefa."));
     } finally {
       setIsSaving(false);
     }
@@ -647,6 +726,7 @@ export function StudyCyclesWorkspace({ taskOptions }: { taskOptions: TaskOption[
                           ))}
                         </select>
                         <small>{getTaskStatusLabel(task.mission.status)}</small>
+                        <button type="button" className={styles.textButton} onClick={() => void handleRemoveTask(task)} disabled={isSaving}>Remover</button>
                       </label>
                     </div>
                   ))}
@@ -678,6 +758,33 @@ export function StudyCyclesWorkspace({ taskOptions }: { taskOptions: TaskOption[
                   <button type="submit" className={styles.secondaryButton} disabled={isSaving || !canMutate}>
                     Associar tarefa
                   </button>
+                </form>
+
+                <div className={styles.taskStack}>
+                  <div className={styles.taskStackHeader}>
+                    <span>Projetos de portfolio</span>
+                    <strong>{cycle.projects.length}</strong>
+                  </div>
+                  {cycle.projects.map((project) => (
+                    <div className={styles.taskCard} key={project.id}>
+                      <div><span>{project.project_id}</span><strong>{project.title}</strong></div>
+                    </div>
+                  ))}
+                </div>
+
+                <form className={styles.taskForm} onSubmit={(event) => void handleProjectSubmit(event, cycle)}>
+                  <label>
+                    Associar projeto
+                    <select
+                      value={projectDrafts[cycle.cycle.id] ?? ""}
+                      onChange={(event) => setProjectDrafts((current) => ({ ...current, [cycle.cycle.id]: event.target.value }))}
+                      required
+                    >
+                      <option value="">Escolha um projeto</option>
+                      {projectOptions.map((project) => <option key={project.id} value={project.id}>{project.id} · {project.title}</option>)}
+                    </select>
+                  </label>
+                  <button type="submit" className={styles.secondaryButton} disabled={isSaving || !canMutate}>Associar projeto</button>
                 </form>
 
                 <div className={styles.cardFooter}>

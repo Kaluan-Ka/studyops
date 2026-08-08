@@ -56,6 +56,19 @@ export type Fundament = {
   tasks: Task[];
 };
 
+export type PortfolioProject = {
+  id: string;
+  title: string;
+  slug: string;
+  status: string;
+  order: number;
+  summary: string;
+  intro: string;
+  sections: ContentSection[];
+  fundamentIds: string[];
+  taskIds: string[];
+};
+
 const contentRoot = path.join(process.cwd(), "content");
 
 export function slugify(value: string): string {
@@ -151,6 +164,16 @@ export function getFundamentBySlug(slug: string): Fundament | undefined {
   return getFundamentos().find((fundament) => fundament.slug === slug);
 }
 
+export function getProjects(): PortfolioProject[] {
+  return readProjectRecords()
+    .map(buildProject)
+    .sort((left, right) => left.order - right.order || left.id.localeCompare(right.id));
+}
+
+export function getProjectBySlug(slug: string): PortfolioProject | undefined {
+  return getProjects().find((project) => project.slug === slug);
+}
+
 export function getStepBySlug(
   fundamentSlug: string,
   stepSlug: string,
@@ -187,6 +210,12 @@ type FundamentRecord = {
   parsed: ParsedMarkdown;
 };
 
+type ProjectRecord = {
+  filePath: string;
+  data: Record<string, unknown>;
+  parsed: ParsedMarkdown;
+};
+
 function readFundamentRecords(): FundamentRecord[] {
   const directory = path.join(contentRoot, "fundamentos");
 
@@ -203,6 +232,45 @@ function readFundamentRecords(): FundamentRecord[] {
         parsed: splitIntoSections(parsedFile.content),
       };
     });
+}
+
+function readProjectRecords(): ProjectRecord[] {
+  const directory = path.join(contentRoot, "projetos");
+
+  if (!fs.existsSync(directory)) {
+    return [];
+  }
+
+  return fs
+    .readdirSync(directory)
+    .filter((fileName) => fileName.endsWith(".md"))
+    .map((fileName) => {
+      const filePath = path.join(directory, fileName);
+      const parsedFile = matter(fs.readFileSync(filePath, "utf8"));
+
+      return {
+        filePath,
+        data: parsedFile.data as Record<string, unknown>,
+        parsed: splitIntoSections(parsedFile.content),
+      };
+    });
+}
+
+function buildProject(record: ProjectRecord): PortfolioProject {
+  const { data, filePath, parsed } = record;
+
+  return {
+    id: requiredString(data, "id", filePath),
+    title: requiredString(data, "title", filePath),
+    slug: requiredString(data, "slug", filePath),
+    status: requiredString(data, "status", filePath),
+    order: requiredNumber(data, "order", filePath),
+    summary: requiredString(data, "summary", filePath),
+    intro: parsed.intro,
+    sections: parsed.sections,
+    fundamentIds: stringArray(requiredArray(data, "fundament_ids", filePath)),
+    taskIds: stringArray(requiredArray(data, "task_ids", filePath)),
+  };
 }
 
 function buildFundament(record: FundamentRecord): Fundament {

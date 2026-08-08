@@ -33,6 +33,8 @@ export default function Home() {
           <a href="#missoes">Missões</a>
           <a href="#evidencias">Evidências</a>
           <Link href="/ciclos">Ciclos</Link>
+          <Link href="/projetos">Projetos</Link>
+          <Link href="/progresso">Progresso</Link>
         </nav>
       </header>
 

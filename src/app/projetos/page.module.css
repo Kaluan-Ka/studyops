@@ -1,0 +1,32 @@
+.page { min-height: 100vh; background: linear-gradient(135deg, #071016 0%, #101725 58%, #1b1628 100%); color: #edf6f1; }
+.header { display: flex; width: min(1240px, calc(100% - 40px)); margin: 0 auto; padding: 22px 0; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid rgba(183,201,199,.16); }
+.brand { color: #ffd45d; font-size: 18px; font-weight: 850; }
+.header nav { display: flex; flex-wrap: wrap; gap: 10px; color: #b7c9c7; font-size: 12px; font-weight: 850; text-transform: uppercase; }
+.header nav a { padding: 8px 10px; border: 1px solid rgba(183,201,199,.18); }
+.main { width: min(1240px, calc(100% - 40px)); margin: 0 auto; padding: 34px 0 76px; }
+.workspace { display: grid; gap: 20px; }
+.introPanel, .statusPanel { display: flex; align-items: end; justify-content: space-between; gap: 28px; padding: clamp(24px, 4vw, 42px); border: 1px solid rgba(183,201,199,.2); background: rgba(7,16,22,.74); }
+.introPanel h1, .statusPanel h1 { margin-top: 10px; color: #f8f1d0; font-size: clamp(34px,5vw,58px); line-height: 1.02; }
+.introPanel p:last-child, .statusPanel > p:last-of-type { max-width: 720px; margin-top: 16px; color: #d0dfdc; font-size: 17px; line-height: 1.55; }
+.eyebrow, .projectId { color: #8bf28e; font-size: 11px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+.telemetry { min-width: 190px; padding: 16px; border-left: 3px solid #69d8ff; background: rgba(16,23,37,.8); }
+.telemetry span, .telemetry small { color: #b7c9c7; font-size: 12px; }
+.telemetry strong { display: block; margin: 6px 0; color: #69d8ff; font-size: 42px; line-height: 1; }
+.telemetry small { line-height: 1.4; }
+.projectGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.projectCard { padding: 22px; border: 1px solid rgba(183,201,199,.23); background: #eef2e6; color: #071016; box-shadow: 8px 8px 0 rgba(0,0,0,.2); }
+.projectHeader { display: flex; align-items: start; justify-content: space-between; gap: 14px; }
+.projectHeader h2 { margin-top: 7px; font-size: 22px; line-height: 1.15; }
+.statusBadge { padding: 6px 8px; background: #ffd45d; color: #071016; font-size: 10px; font-weight: 950; text-transform: uppercase; white-space: nowrap; }
+.projectSummary { margin-top: 16px; color: #2c3b34; line-height: 1.5; }
+.projectLinks { margin-top: 12px; color: #4f6867; font-size: 12px; font-weight: 800; }
+.projectForm { display: grid; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(7,16,22,.16); }
+.projectForm label { display: grid; gap: 6px; color: #2c3b34; font-size: 12px; font-weight: 800; }
+.projectForm textarea, .projectForm select { width: 100%; border: 1px solid #a8b9ad; border-radius: 4px; background: #fffdf2; color: #071016; font: inherit; padding: 9px 10px; resize: vertical; }
+.projectForm select { min-height: 40px; }
+.primaryButton { border: 1px solid #071016; border-radius: 4px; padding: 11px 14px; background: #8bf28e; color: #071016; cursor: pointer; font-weight: 900; }
+.primaryButton:disabled { cursor: wait; opacity: .55; }
+.feedback, .error, .muted { padding: 14px 16px; border: 1px solid rgba(183,201,199,.2); color: #d0dfdc; }
+.error { color: #ffd9d2; border-color: #bd6d65; }
+.statusAction { margin-top: 22px; }
+@media (max-width: 800px) { .header, .introPanel { align-items: flex-start; flex-direction: column; } .projectGrid { grid-template-columns: 1fr; } }

@@ -79,6 +79,12 @@ export default async function FundamentSessionPage({ params }: PageProps) {
                   fundamentSlug: fundament.slug,
                   sessionSlug: section.slug,
                 })}
+                target={{ scope: "fundament-session", fundamentId: fundament.id, sessionSlug: section.slug }}
+                legacyTarget={{
+                  scope: "fundament-session",
+                  fundamentSlug: fundament.slug,
+                  sessionSlug: section.slug,
+                }}
                 label="Registro de campo desta sessão"
               />
             </div>
