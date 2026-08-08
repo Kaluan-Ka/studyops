@@ -23,9 +23,7 @@ Supabase.
 
 A leitura de fundamentos, sessoes e missoes e publica. O login e feito somente
 com Google e e exigido para iniciar uma missao, alterar seu status, salvar
-evidencias ou registrar notas. As notas continuam em `localStorage` nesta
-primeira fatia; elas nao sao lidas nem gravadas enquanto nao houver uma sessao
-autenticada.
+evidencias ou registrar notas. 
 
 No projeto Supabase, habilite Google em `Authentication > Providers > Google`.
 No Google Cloud, crie um OAuth Client ID do tipo Web e use como callback:
